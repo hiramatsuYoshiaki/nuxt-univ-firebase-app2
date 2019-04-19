@@ -3,12 +3,12 @@
     <div>
       <logo />
       <h1 class="title">
-        nuxt-univ-app1
+        h-works
       </h1>
       <h2 class="subtitle">
-        My peachy Nuxt.js project
+        Nuxt.js Universal
       </h2>
-      <div class="links">
+      <!-- <div class="links">
         <a
           href="https://nuxtjs.org/"
           target="_blank"
@@ -19,6 +19,11 @@
           target="_blank"
           class="button--grey"
         >GitHub</a>
+      </div> -->
+      <div class="links">
+         <nuxt-link to="/works">Work page</nuxt-link>
+         <nuxt-link to="/about">About page</nuxt-link>
+         <nuxt-link to="/contact">Contact page</nuxt-link>
       </div>
     </div>
   </section>
