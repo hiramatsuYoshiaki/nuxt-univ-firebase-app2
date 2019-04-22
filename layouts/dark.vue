@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div>ブログのナビゲーションバーをここに設置します</div>
+  <div class="dark">
+    <!-- <div>dark layout</div> -->
     <nuxt />
   </div>
 </template>
@@ -52,5 +52,10 @@
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.dark{
+    background-color: #708a84;
+    ;
 } */
 </style>

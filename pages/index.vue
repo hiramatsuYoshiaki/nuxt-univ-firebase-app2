@@ -21,9 +21,18 @@
         >GitHub</a>
       </div> -->
       <div class="links">
-         <nuxt-link to="/works">Work page</nuxt-link>
-         <nuxt-link to="/about">About page</nuxt-link>
-         <nuxt-link to="/contact">Contact page</nuxt-link>
+        <nuxt-link to="/">
+          HOME
+        </nuxt-link>
+        <nuxt-link to="/works">
+          Work
+        </nuxt-link>
+        <nuxt-link to="/about">
+          About
+        </nuxt-link>
+        <nuxt-link to="/contact">
+          Contact
+        </nuxt-link>
       </div>
     </div>
   </section>
@@ -33,6 +42,8 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
+  // layout: 'dark',
+  layout: 'topPage',
   components: {
     Logo
   }
@@ -40,7 +51,7 @@ export default {
 </script>
 
 <style>
-.container {
+/* .container {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -69,5 +80,5 @@ export default {
 
 .links {
   padding-top: 15px;
-}
+} */
 </style>

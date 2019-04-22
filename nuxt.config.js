@@ -14,7 +14,8 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/h-logo-white.ico' }
     ]
   },
 
@@ -26,9 +27,19 @@ export default {
   /*
   ** Global CSS
   */
+  // css: [
+  // ],
   css: [
+    // Node.js モジュールを直接ロードする (ここでは SASS ファイル)
+    // 'bulma',
+    // プロジェクト内の CSS ファイル
+    // '@/assets/css/main.css',
+    // プロジェクト内の SCSS ファイル
+    // '@/assets/sass/main.scss'
+    '@/assets/sass/styles.scss'
+    // { src: '~/assets/sass/main.scss', lang: 'scss' },
+    // { src: '~/assets/sass/stylus.scss', lang: 'scss' },
   ],
-
   /*
   ** Plugins to load before mounting the App
   */
@@ -63,7 +74,10 @@ export default {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+          options : {
+            fix : true
+          }
         })
       }
     }

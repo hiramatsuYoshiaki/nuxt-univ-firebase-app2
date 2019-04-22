@@ -1,0 +1,144 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,body{
+    margin: 0;
+    padding: 0;
+}
+html{
+  font-size: 16px;
+  overflow-x: hidden;
+}
+body{
+    background: $body-color;
+    color:$body-text;
+    //set typography
+    // font-family: $font-family;
+    // font-size: $font-size;
+    // line-height: $line-height;
+    text-rendering: optimizeLegibility;
+}
+// body{
+  // overflow-x: hidden;
+  // overflow-Y: hidden;
+// }
+// .wrapper {
+//     overflow: hidden;
+//     width: 100%;
+//     padding: 0;
+//     margin: 0;
+//     height: 100%;
+//     position: relative;
+// }
+a{
+    color:$link-color;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover{
+        // color:$hover-color;
+        opacity: .5;
+    }
+}
+
+h1,h2,h3,h4,h5,h6,p{
+    margin: 0;
+    padding: 0;
+     
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+  }
+
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+p{
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.6;
+  color: inherit;
+}
+
+//typographt setting
+// h1, .h1 {
+//   font-size: 2.5rem;
+// }
+
+// h2, .h2 {
+//   font-size: 2rem;
+// }
+
+// h3, .h3 {
+//   font-size: 1.75rem;
+// }
+
+// h4, .h4 {
+//   font-size: 1.5rem;
+// }
+
+// h5, .h5 {
+//   font-size: 1.25rem;
+// }
+
+// h6, .h6 {
+//   font-size: 1rem;
+// }
+
+
+.position-relative {
+  position: relative !important;
+}
+
+.position-absolute {
+  position: absolute !important;
+}
+
+.position-fixed {
+  position: fixed !important;
+}
+
+.position-sticky {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
+.d_block{
+  display: block !important;
+}
+.d_none{
+  display: none !important;
+}
+
+
