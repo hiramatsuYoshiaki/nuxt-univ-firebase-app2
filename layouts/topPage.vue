@@ -1,11 +1,16 @@
 <template>
-  <div>
-    <div>ブログのナビゲーションバーをここに設置します</div>
+  <div class="topPage">
+    <!-- <div>topPage layout</div> -->
     <nuxt />
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+// @import '~/assets/sass/main.scss';
+
+// .topPage{
+//     background-color: red;
+// }
 /* html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -52,5 +57,8 @@
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
-} */
+}
+
+*/
+
 </style>
