@@ -154,7 +154,7 @@ modules: [
     '@nuxtjs/sitemap',
   ],
   sitemap: {
-    // path: '/sitemap.xml',//Default: sitemap.xml
+    // path: '/sitemaps.xml',//Default: sitemaps.xml
     hostname: 'https://romantic-kare-6d357c.netlify.com/',
     generate: true,
     // exclude: [
