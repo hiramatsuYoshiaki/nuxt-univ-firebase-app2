@@ -1,13 +1,56 @@
 <template>
   <div class="topPage">
-    <!-- <div>topPage layout</div> -->
+    <HeaderNav />
+
+    <!-- <div>HeaderBar</div> -->
+    <!-- <HeaderBar
+      msg="HeaderBar"
+      nav-menu="home"
+      :header-scroll-type="true"
+      :header-fixed-type="false"
+      :header-stiky-type="false"
+      :logo-position-left="true"
+      :logo-position-center="false"
+      :logo-position-right="false"
+    /> -->
+    <!-- <HeaderNav
+      msg="HeaderBar"
+      nav-menu="home"
+      :header-scroll-type="true"
+      :header-fixed-type="false"
+      :header-stiky-type="false"
+      :logo-position-left="true"
+      :logo-position-center="false"
+      :logo-position-right="false"
+    /> -->
     <nuxt />
+    <div>TransitionScreen</div>
+    <!-- </headerbar> -->
   </div>
 </template>
+<script>
+// import Logo from '~/components/Logo.vue'
+// import HeaderBar from '~/components/header/HeaderBar.vue'
+import HeaderNav from '~/components/header/HeaderNav.vue'
 
+export default {
+  layout: 'topPage',
+  components: {
+    // Logo
+    // HeaderBar
+    HeaderNav
+  }
+}
+</script>
 <style scoped lang="scss">
-// @import '~/assets/sass/main.scss';
-
+@import "~/assets/sass/variable.scss";
+// .topPage{
+//   position: absolute;
+//   position: relative;
+//   margin: 0;
+//   padding:0;
+//   cursor: pointer;
+// }
 // .topPage{
 //     background-color: red;
 // }

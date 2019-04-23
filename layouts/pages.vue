@@ -1,7 +1,9 @@
 <template>
   <div class="pages">
-    <div>pages layout</div>
+    <div>BgImageFull</div>
+    <div>HeaderBar</div>
     <nuxt />
+    <div>TransitionScreen</div>
   </div>
 </template>
 

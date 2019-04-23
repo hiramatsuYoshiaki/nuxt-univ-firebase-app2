@@ -44,12 +44,14 @@ extend(config, ctx) {
 ex.https://github.com/nuxt/nuxt.js/issues/1628 
  
 
+
 # cssプロパティ 
-sass を利用したい場合は node-sass および sass-loader パッケージをインストールしてください。
+sass を利用したい場合は node-sass および sass-loader パッケージをインストールしてください。 
+1. install 
 ```
 npm install --save-dev node-sass sass-loader
 ```
-
+2. nuxt.config　setting 
 ```
 export default {
   css: [
@@ -57,4 +59,73 @@ export default {
     '@/assets/sass/styles.scss'
   ]
 }
+```
+3. component style setting 
+```
+<style scoped lang="scss">
+</style>
+```
+
+# SASS変数をvueファイルで使う 
+importの記述なしで使う。
+1. install 
+```
+npm install --save-dev @nuxtjs/style-resources
+```
+2. nuxt.config setting 
+```
+modules: [
+    '@nuxtjs/style-resources',
+  ],
+  styleResources: {
+    sass: [
+      '~/assets/sass/variable.scss',
+    ],
+  },
+```
+3. usage 
+```
+<style scoped lang="scss">
+//@import "../../../assets/scss/common/data/thema.scss";
+.container {
+    color: $text-color
+}
+</style>
+```
+# autoprefixer の設定をカスタマイズする
+Nuxt.js で CSS(Sass) をコンパイルすると、 autoprefixer がベンダープレフィクスを自動で適用してくれます。 
+1. nuxt.config setting 
+```
+build: {
+  postcss: [
+    require('autoprefixer')({
+      browsers: ['IE 11', 'last 2 versions' ],
+      grid: true
+    })
+  ]
+}
+
+```
+2. autoprefixer デフォルト設定 
+```
+1%, last 2 versions, Firefox ESR
+```
+1%:1%以上のシェアがあるブラウザ 
+last 2 versions:最後の2バージョンのブラウザ 
+Firefox ESR:最新のFirefox ESR版  
+3.対応ブラウザの確認
+https://browserl.ist/?q=%3E+1%25%2C+last+2+versions%2C+Firefox+ESR 
+  
+参考ページ:https://parashuto.com/rriver/tools/using-custom-data-for-autoprefixer 
+
+# Google Analytics
+1. install 
+```
+npm install --save @nuxtjs/google-analytics
+```
+2.アナリティクスのトラッキング IDを設定する 
+```
+modules: [
+  ['@nuxtjs/google-analytics', { id: 'UA-xxxxx-x' }],
+],
 ```

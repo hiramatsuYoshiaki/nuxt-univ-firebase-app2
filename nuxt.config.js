@@ -51,8 +51,15 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
+    ['@nuxtjs/google-analytics', { id: 'UA-35511262-5' }],
   ],
+  styleResources: {
+    sass: [
+      '~/assets/sass/variable.scss',
+    ],
+  },
   /*
   ** Axios module configuration
   */
@@ -80,6 +87,15 @@ export default {
           }
         })
       }
-    }
+    },
+    //autoprefixer
+    postcss: [
+      require('autoprefixer')({
+        browsers: ['IE 11', 'last 2 versions' ],
+        grid: true
+      })
+    ],
+    
+
   }
 }
