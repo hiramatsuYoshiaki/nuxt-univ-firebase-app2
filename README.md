@@ -129,3 +129,67 @@ modules: [
   ['@nuxtjs/google-analytics', { id: 'UA-xxxxx-x' }],
 ],
 ```
+# Google Serch Colsole
+1. Google Serch Colsoleからメタタグを取得
+2. nuxt.config setting
+```
+head: {
+   
+    meta: [
+      { name: "google-site-verification",
+        content: "TaWpD9i4R5GSPzJjnTc8--t-g8bbDKbfxQX-e1kgio0" },
+    ],
+  },
+```
+
+# Nuxt.jsで静的ファイル生成時にサイトマップも自動生成する方法
+npm run generateで静的ウェブサイトを生成 
+1. install 
+```
+npm install --save @nuxtjs/sitemap
+```
+2. nuxt.config.js setting 
+```
+modules: [
+    '@nuxtjs/sitemap',
+  ],
+  sitemap: {
+    // path: '/sitemap.xml',//Default: sitemap.xml
+    hostname: 'https://romantic-kare-6d357c.netlify.com/',
+    generate: true,
+    // exclude: [
+    //   '/admin'
+    // ],
+    routes:[
+      "/",
+      {
+        url: '/works',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: '2017-06-30T13:30:00.000Z'
+      },
+      "/about",
+      "/contact"
+    ]
+  },
+```
+各パラメーターについて
+path
+生成されるサイトマップファイルの名前。
+generateオプションでdirを変更していなければ、distフォルダの中に生成される。
+
+hostname
+サイト名。
+
+generate
+nuxt generate時に静的なサイトマップファイルを生成するかの設定。
+ここをtrueにしておかないとサイトマップファイルが生成されないので注意。
+
+exclude
+サイトマップに含めたくないRULを指定できる。
+管理者ページなどがある場合に使用する。
+
+routes
+サイトマップに含めるURLを追加する。
+基本的にはgenerateオプションのroutesと同じように記述すればOK
+上のコードはAPIから記事の一覧を取得して、記事毎のURLをroutesに追加する例。
