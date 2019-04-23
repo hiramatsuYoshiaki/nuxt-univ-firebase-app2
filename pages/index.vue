@@ -34,6 +34,24 @@
           Contact
         </nuxt-link>
       </div>
+      <div>
+        <a href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
+          <div>GitHub</div>
+          <div>hiramatsuYoshiaki/nuxt-univ-app1</div>
+          <div>master/editer</div>
+          <div>https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
+          <div>GitHub  Page</div>
+          <div>https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
+        </a>
+      </div>
+      <div>
+        <a href="https://app.netlify.com/sites/romantic-kare-6d357c/overview">
+          <div>Netlify</div>
+          <div>Yoshiaki Hiramatsu team</div>
+          <div>romantic-kare-6d357c</div>
+          <div>https://romantic-kare-6d357c.netlify.com</div>
+        </a>
+      </div>
     </div>
   </section>
 </template>
@@ -42,7 +60,6 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
-  // layout: 'dark',
   layout: 'topPage',
   components: {
     Logo
@@ -51,6 +68,9 @@ export default {
 </script>
 
 <style>
+/* .container{
+  margin-top: 10rem;
+} */
 /* .container {
   margin: 0 auto;
   min-height: 100vh;
