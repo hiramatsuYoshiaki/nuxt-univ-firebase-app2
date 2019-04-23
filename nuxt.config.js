@@ -9,6 +9,8 @@ export default {
   head: {
     title: pkg.name,
     meta: [
+      { name: "google-site-verification",
+        content: "TaWpD9i4R5GSPzJjnTc8--t-g8bbDKbfxQX-e1kgio0" },
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
