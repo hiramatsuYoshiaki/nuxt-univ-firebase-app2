@@ -61,11 +61,11 @@ export default {
 }
 ```
 3. component style setting 
-```
-<style scoped lang="scss">
-</style>
-```
-
+~~~
+    <style scoped lang="scss">
+    </style>
+~~~
+ 
 # SASS変数をvueファイルで使う 
 importの記述なしで使う。
 1. install 
