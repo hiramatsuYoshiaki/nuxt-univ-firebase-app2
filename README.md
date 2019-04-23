@@ -129,3 +129,16 @@ modules: [
   ['@nuxtjs/google-analytics', { id: 'UA-xxxxx-x' }],
 ],
 ```
+# Google Serch Colsole
+1. Google Serch Colsoleからメタタグを取得
+2. nuxt.config setting
+```
+head: {
+   
+    meta: [
+      { name: "google-site-verification",
+        content: "TaWpD9i4R5GSPzJjnTc8--t-g8bbDKbfxQX-e1kgio0" },
+    ],
+  },
+```
+

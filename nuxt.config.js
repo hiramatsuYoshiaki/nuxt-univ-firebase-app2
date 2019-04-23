@@ -56,12 +56,33 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     ['@nuxtjs/google-analytics', { id: 'UA-35511262-5' }],
+    '@nuxtjs/sitemap',
   ],
   styleResources: {
     sass: [
       '~/assets/sass/variable.scss',
     ],
   },
+  sitemap: {
+    // path: '/sitemap.xml',//Default: sitemap.xml
+    hostname: 'https://romantic-kare-6d357c.netlify.com/',
+    generate: true,
+    // exclude: [
+    //   '/admin'
+    // ],
+    routes:[
+      "/",
+      {
+        url: '/works',
+        changefreq: 'daily',
+        priority: 1,
+        lastmodISO: '2017-06-30T13:30:00.000Z'
+      },
+      "/about",
+      "/contact"
+    ]
+  },
+    
   /*
   ** Axios module configuration
   */
