@@ -1,77 +1,74 @@
 <template>
   <div class="headerBar">
-    <div class="nav-menu">
-      <div class="block b-left">
-        left
-      </div>
-      <div class="block b-center">
-        center
-      </div>
-      <div class="block b-right">
-        right
-      </div>
-    </div>
     <div class="mobile-menu" :class="{ v_open_menu : active, v_close_menu : !active }">
-      mobile-menu
+      <div class="m-menu-wrap">
+        <div class="menu_items menu_items_column">
+          <div class="menu-item-box">
+            <div class="menu_link" :class="{ menu_item_visible: menuVisible === 'works' }" @click="linkAction('works')">
+              WORKS
+            </div>
+            <div class="menu_underline" />
+          </div>
+          <div class="menu-item-box">
+            <div class="menu_link" :class="{ menu_item_visible: menuVisible === 'about' }" @click="linkAction('about')">
+              ABOUT
+            </div>
+            <div class="menu_underline" />
+          </div>
+          <div class="menu-item-box">
+            <div class="menu_link" :class="{ menu_item_visible: menuVisible === 'contact' }" @click="linkAction('contact')">
+              CONTACT
+            </div>
+            <div class="menu_underline" />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="menu-button">
+    <div class="nav-menu">
+      <div class="block left-block">
+        <div class="logo-wrap">
+          <nuxt-link to="/">
+            <img class="logo-img" src="~/assets/img/logo/h-works1200x600white.svg" alt="h-works logo">
+          </nuxt-link>
+        </div>
+      </div>
+      <div class="block center-block" />
+      <div class="block right-block">
+        <div class="m-menu-wrap menu-display">
+          <div class="menu_items menu_items_row">
+            <div class="menu-item-box">
+              <nuxt-link to="/works" class="menu_link" :class="{ menu_item_visible: menuVisible === 'works' }">
+                WORKS
+              </nuxt-link>
+              <div class="menu_underline" />
+            </div>
+            <div class="menu-item-box">
+              <nuxt-link to="/about" class="menu_link" :class="{ menu_item_visible: menuVisible === 'about' }">
+                ABOUT
+              </nuxt-link>
+              <div class="menu_underline" />
+            </div>
+            <div class="menu-item-box">
+              <nuxt-link to="/contact" class="menu_link" :class="{ menu_item_visible: menuVisible === 'contact' }">
+                CONTACT
+              </nuxt-link>
+              <div class="menu_underline" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-button menu-button-display">
       <div class="m-bar-wrap" @click="active = !active">
         <div class="upper-bar" :class="{ close_upper: active, open_upper: !active }" />
         <div class="under-bar" :class="{ close_under: active, open_under: !active }" />
       </div>
     </div>
-    <!-- <div class="menu-button m-bar-position m-bar-display">
-      <div class="m-bar-wrap" @click="active = !active">
-        <div class="upper-bar" :class="{ close_upper: active, open_upper: !active }" />
-        <div class="under-bar" :class="{ close_under: active, open_under: !active }" />
-      </div>
-    </div> -->
-
-    <!-- <div class="m-menu-gb">
-      bg
-    </div> -->
-    <!-- <div class="logo">
-      logo
-    </div> -->
-    <!-- <div class="laptop-menu">
-      <div class="links">
-        <nuxt-link to="/">
-          home
-        </nuxt-link>
-        <nuxt-link to="/works">
-          Work
-        </nuxt-link>
-        <nuxt-link to="/about">
-          About
-        </nuxt-link>
-        <nuxt-link to="/contact">
-          Contact
-        </nuxt-link>
-      </div>
-    </div> -->
-    <!-- <div class="menu-bar">
-      bar
-    </div> -->
-    <!-- <div class="mobile-menu">
-      <div class="links">
-        <nuxt-link to="/">
-          home
-        </nuxt-link>
-        <nuxt-link to="/works">
-          Work
-        </nuxt-link>
-        <nuxt-link to="/about">
-          About
-        </nuxt-link>
-        <nuxt-link to="/contact">
-          Contact
-        </nuxt-link>
-      </div>
-    </div> -->
   </div>
 </template>
 <script>
 export default {
+  transition: 'a-slide',
   props: {
     msg: {
       type: String,
@@ -80,7 +77,16 @@ export default {
   },
   data() {
     return {
-      active: true
+      active: true,
+      menuVisible: ''
+    }
+  },
+  methods: {
+    linkAction(linkPath) {
+      this.active = true
+      setTimeout(() => {
+        this.$router.push({ path: linkPath })
+      }, 500)
     }
   }
 }
@@ -92,13 +98,23 @@ export default {
     justify-content: center;
     align-items: center;
 }
+%left{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+%right{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+}
 .headerBar{
-    position: relative ;
-    // top: 0;
-    // left: 0;
+    position: absolute ;
+    top: 0;
+    left: 0;
     width:100vw;
     // height:100%;
-    // z-index: 1000;
+    z-index: 1000;
     // height: $header-height;
     // background-color: transparent;
     // color: $header-text;
@@ -122,7 +138,93 @@ export default {
     left:0;
     width:100vw;
     height: $header-height;
-    background-color:green;
+    display: flex;
+    flex-direction: row;
+}
+.nav-menu .block{
+    // border: 1px solid gray;
+    width: 33.333%;
+    height:100%;
+}
+.nav-menu .left-block{
+   @extend %left;
+}
+.nav-menu .center-block{
+   @extend %center;
+}
+.nav-menu .right-block{
+   @extend %right;
+}
+//logo bar----------------------------------------
+.logo-wrap{
+  margin: 0rem 2rem;
+  @media (min-width: 992px) {
+    margin:0rem 5rem;
+  }
+  cursor: pointer;
+}
+.logo-img{
+    width: 6rem;
+    height: 3rem;
+}
+//menu_items---------------------------------------
+.m-menu-wrap{
+  margin: 0rem 2rem;
+  @media (min-width: 992px) {
+    margin:0rem 5rem;
+  }
+}
+.menu-display{
+  display: none !important;
+  @media (min-width: 992px) {
+    display: block !important;
+  }
+}
+.menu_items{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu_items_row{
+  flex-direction: row;
+}
+.menu_items_column{
+  flex-direction: column;
+}
+.menu-item-box{
+  position:relative;
+  overflow: hidden;
+  margin: 0 1rem;
+  padding: .3rem 0;
+  .menu_underline{
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    height: 2px;
+    margin-top: .2rem;
+    // transition: .1s all ease-in;
+    transform: translateX(-101%);
+  }
+  &:hover{
+    .menu_underline{
+      transition: .5s all ease-in;
+      transform: translateX(0);
+    }
+  }
+}
+.menu_link{
+    display: inline-block;
+    opacity: .5;
+    text-transform: uppercase;
+    &:hover{
+      opacity: .75;
+    }
+}
+.menu_item_visible{
+  opacity: 1;
+  pointer-events: none;
 }
 //mobile-menu------------------------------------
 .mobile-menu{
@@ -131,8 +233,10 @@ export default {
     left:0;
     width:100vw;
     height: calc(100vh + #{ $header-height });
-    background-color:rgba(0,0,0,2);
-    transform: translateY(-100vh);
+    background-color:rgba(0,0,0,1);
+    // transition: .1s ;
+    // transform: translateY(-100vh);
+    @extend %center;
 }
 .v_open_menu{
   // opacity: 0;
@@ -151,15 +255,19 @@ export default {
     right:0;
     width: $header-height;
     height: $header-height;
-    background-color: red;
-
+}
+.menu-button-display{
+  display: block;
+  @media (min-width: 992px) {
+    display: none;
+  }
 }
 .m-bar-wrap{
     position:relative;
     width:100%;
     height: 100%;
     overflow: hidden;
-     cursor: pointer;
+    cursor: pointer;
 }
 .upper-bar, .under-bar {
     position: absolute;

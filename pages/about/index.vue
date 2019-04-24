@@ -36,11 +36,35 @@
   </section>
 </template>
 <script>
-// import Logo from '~/components/Logo.vue'
 export default {
-  layout: 'pages'
-//   components: {
-//     Logo
-//   }
+  layout: 'topPage'
+//   transition: 'content-slide'
 }
 </script>
+<style scoped lang="scss">
+%center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+%left{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+%right{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.container{
+  width: 100vw;
+  margin-top: $header-height;
+  padding: 2rem;
+  @media (min-width: 992px){
+    padding: 5rem;
+  }
+  @extend %center;
+  flex-direction: column;
+}
+</style>

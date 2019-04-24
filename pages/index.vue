@@ -1,6 +1,6 @@
 <template>
-  <section class="container">
-    <div>
+  <div class="container">
+    <div class="content-header">
       <logo />
       <h1 class="title">
         h-works
@@ -8,97 +8,168 @@
       <h2 class="subtitle">
         Nuxt.js Universal
       </h2>
-      <!-- <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >GitHub</a>
-      </div> -->
-      <div class="links">
+    </div>
+    <div class="content">
+      <section>
+        <a href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
+          <h3>GitHub</h3>
+          <div class="word-wrap">hiramatsuYoshiaki/nuxt-univ-app1</div>
+          <div class="word-wrap">master/editer</div>
+          <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
+          <div class="word-wrap">GitHub  Page</div>
+          <div class="word-wrap">https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
+        </a>
+      </section>
+      <section>
+        <a href="https://app.netlify.com/sites/romantic-kare-6d357c/overview">
+          <h3>Netlify</h3>
+          <div class="word-wrap">Yoshiaki Hiramatsu team</div>
+          <div class="word-wrap">romantic-kare-6d357c</div>
+          <div class="word-wrap">https://romantic-kare-6d357c.netlify.com</div>
+        </a>
+      </section>
+    </div>
+    <div class="content-footer">
+      <nav class="links">
         <nuxt-link to="/">
           HOME
         </nuxt-link>
         <nuxt-link to="/works">
-          Work
+          WORKS
         </nuxt-link>
         <nuxt-link to="/about">
-          About
+          ABOUT
         </nuxt-link>
         <nuxt-link to="/contact">
-          Contact
+          CONTACT
         </nuxt-link>
+      </nav>
+      <div class="footer-sepalater">
+        <div class="line" />
       </div>
       <div>
-        <a href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
-          <div>GitHub</div>
-          <div>hiramatsuYoshiaki/nuxt-univ-app1</div>
-          <div>master/editer</div>
-          <div>https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
-          <div>GitHub  Page</div>
-          <div>https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
-        </a>
-      </div>
-      <div>
-        <a href="https://app.netlify.com/sites/romantic-kare-6d357c/overview">
-          <div>Netlify</div>
-          <div>Yoshiaki Hiramatsu team</div>
-          <div>romantic-kare-6d357c</div>
-          <div>https://romantic-kare-6d357c.netlify.com</div>
-        </a>
+        © 2019 h-works.
       </div>
     </div>
-  </section>
+    <div class="slider-screen " />
+  </div>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-
 export default {
   layout: 'topPage',
+  // transition: 'content-slide',
   components: {
     Logo
   }
 }
 </script>
 
-<style>
-/* .container{
-  margin-top: 10rem;
-} */
-/* .container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+<style scoped lang="scss">
+%center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+%left{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
 }
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+%right{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
 }
+.container{
+  margin-top: $header-height;
+  width: 100vw;
+  padding: 2rem;
+  @media (min-width: 992px){
+    padding: 5rem;
+  }
+  @extend %center;
+  flex-direction: column;
+}
+//header-----------------------------
+.content-header{
+  @extend %center;
+  flex-direction: column;
+}
+//content -----------------------
+.content{
+  margin-top:2rem;
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+  @media(min-width: 992px){
+    width: 80%;
+    display:flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+  }
+}
+section{
+  width: 100%;
+  margin-top:2rem;
+  padding: 2rem;
+  @media(min-width: 992px){
+    width: 50%;
+  }
+}
+.links{
+  @extend %center;
+}
+.links a{
+  display: inline-block;
+  margin: 0 2rem;
+  cursor: pointer;
+}
+.word-wrap{
+  word-wrap: break-word;
+}
+// footer-------------------------------
+.content-footer{
+  width: 100%;
+  margin-top:4rem;
+  @extend %center;
+  flex-direction: column;
+}
+.content-footer nav{
+  margin-top: 2rem;
+}
+.footer-sepalater{
+ width: 100%;
+ height: 2rem;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.footer-sepalater .line{
+  width:80%;
+  height: 1px;
+  background-color: #fff;
+}
+//page transition
+//mobile-menu------------------------------------
+.slider-screen{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    height: 100vh;
+    background-color:rgba(255, 0, 0, 0.2);
+    transform: translateX(-100vw) ;
+}
+// .slider-screen-close{
+//   transform: translateX(-50vw) ;
+//   transition: .5s .5s all ease;
+// }
+// .slider-screen-move{
+//   transform: translateX(0) ;
+//   transition: .5s .5s all ease;
+// }
 
-.links {
-  padding-top: 15px;
-} */
 </style>
