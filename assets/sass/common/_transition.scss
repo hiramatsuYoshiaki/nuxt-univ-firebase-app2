@@ -1,3 +1,42 @@
+// page-----------
+//アプリケーションのすべてのページでフェードさせるトランジション
+.page-enter-active, .page-leave-active {
+    transition: opacity .5s;
+}
+.page-enter, .page-leave-to {
+    opacity: 0;
+}
+
+//特定のページのみに対してカスタムトランジション
+.test-enter-active, .test-leave-active {
+    transition: opacity .5s;
+}
+.test-enter, .test-leave-active {
+    opacity: 0;
+}
+//コンテンツ全体をスライド
+.content-slide-enter-active, .content-slide-leave-active {
+    transition: all 1s;
+}
+.content-slide-enter, .content-slide-leave-to {
+    transform: translateX(100vw) ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .tScreen-enter-active {
     // transition: all .5s ;
