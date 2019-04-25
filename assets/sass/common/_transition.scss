@@ -1,11 +1,11 @@
 // page-----------
 //アプリケーションのすべてのページでフェードさせるトランジション
-.page-enter-active, .page-leave-active {
-    transition: opacity .5s;
-}
-.page-enter, .page-leave-to {
-    opacity: 0;
-}
+// .page-enter-active, .page-leave-active {
+//     transition: opacity .5s;
+// }
+// .page-enter, .page-leave-to {
+//     opacity: 0;
+// }
 
 //特定のページのみに対してカスタムトランジション
 .test-enter-active, .test-leave-active {
@@ -21,6 +21,45 @@
 .content-slide-enter, .content-slide-leave-to {
     transform: translateX(100vw) ;
 }
+
+
+//ページ遷移のスクリーン
+.transitionScreen-enter-active {
+    // transition: all .5s ;
+    animation: transitionScreenEnter 1s  ease-in ;
+}
+.transitionScreen-leave-active {
+    // transition: all 1s ;
+    animation: transitionScreenLeave 1s ease-in ;
+}
+@keyframes transitionScreenEnter {
+    0% {
+        transform: translateX(0%);
+    }
+    50% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+@keyframes transitionScreenLeave {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+
+
+
+
+
 
 
 

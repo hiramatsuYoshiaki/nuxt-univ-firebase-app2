@@ -18,22 +18,20 @@
     <transition name="mainCon" appear>
       <div class="main-content">
         <h1>works content</h1>
+        page:{{ page }}
       </div>
     </transition>
     <div class="content-footer">
       <nav class="links">
-        <nuxt-link to="/">
-          HOME
-        </nuxt-link>
-        <nuxt-link to="/works">
+        <a class="menu_link" @click="link_commit('/works')">
           WORKS
-        </nuxt-link>
-        <nuxt-link to="/about">
+        </a>
+        <a class="menu_link" @click="link_commit('/about')">
           ABOUT
-        </nuxt-link>
-        <nuxt-link to="/contact">
+        </a>
+        <a class="menu_link" @click="link_commit('/contact')">
           CONTACT
-        </nuxt-link>
+        </a>
       </nav>
       <div class="footer-sepalater">
         <div class="line" />
@@ -42,19 +40,38 @@
         © 2019 h-works.
       </div>
     </div>
-    <div class="slider-screen " />
+    <transition appear name="transitionScreen">
+      <TransitionScreen v-if="page === '/works'" />
+    </transition>
   </div>
 </template>
+
 <script>
+import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 export default {
   layout: 'topPage',
   //   transition: 'content-slide'
+  components: {
+    TransitionScreen
+  },
   data() {
     return {
       img: require('~/assets/img/fuji1.jpg')
     }
+  },
+  computed: {
+    page() {
+      return this.$store.state.page
+    }
+  },
+  methods: {
+    link_commit(linkPath) {
+      this.$store.commit('pagePathSet', linkPath)
+      setTimeout(() => {
+        this.$router.push({ path: linkPath })
+      }, 500)
+    }
   }
-
 }
 </script>
 <style scoped lang="scss">
@@ -76,7 +93,7 @@ export default {
 .container{
   position: relative;
   width: 100vw;
-//   height: 100vh;
+  height: 100%;
   margin-top: $header-height;
   padding: 2rem;
   @media (min-width: 992px){
@@ -89,11 +106,7 @@ export default {
     width:100vw;
     height: 35vh;
 }
-// .content{
-//     width:100vw;
-//     height: 60vh;
-//     background-color: $works-body-color;
-// }
+
 .main-content{
   height: 75vh;
   width:100vw;
@@ -104,6 +117,8 @@ export default {
   // width: auto;
   // min-width: 100vw;
   padding-bottom:20rem;
+  padding-left: 2rem;
+
 }
 .content-footer{
   width: 100vw;
@@ -138,17 +153,6 @@ section{
   width:80%;
   height: 1px;
   background-color: #fff;
-}
-//page transition
-//mobile-menu------------------------------------
-.slider-screen{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100vw;
-    height: 100vh;
-    background-color:rgba(255, 0, 0, 0.2);
-    transform: translateX(-100vw) ;
 }
 //bg --------------------------------------
 .bgImageFull{
@@ -189,6 +193,7 @@ section{
       //横スクロール処理
       min-width: 100vw;
   }
+
 .bgTran-enter-active, .bgTran-leave-active {
     // transition: all .5s  .5s  ease-out;
      //transition: all .5s  .5s  cubic-bezier(0.320, 0.625, 0.580, 1.000);//sharp

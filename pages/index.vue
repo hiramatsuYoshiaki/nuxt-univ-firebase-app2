@@ -51,17 +51,26 @@
         © 2019 h-works.
       </div>
     </div>
-    <div class="slider-screen " />
+    <transition appear name="transitionScreen">
+      <TransitionScreen v-if="page === '/'" />
+    </transition>
   </div>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 export default {
   layout: 'topPage',
   // transition: 'content-slide',
   components: {
-    Logo
+    Logo,
+    TransitionScreen
+  },
+  computed: {
+    page() {
+      return this.$store.state.page
+    }
   }
 }
 </script>
@@ -152,24 +161,5 @@ section{
   height: 1px;
   background-color: #fff;
 }
-//page transition
-//mobile-menu------------------------------------
-.slider-screen{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100vw;
-    height: 100vh;
-    background-color:rgba(255, 0, 0, 0.2);
-    transform: translateX(-100vw) ;
-}
-// .slider-screen-close{
-//   transform: translateX(-50vw) ;
-//   transition: .5s .5s all ease;
-// }
-// .slider-screen-move{
-//   transform: translateX(0) ;
-//   transition: .5s .5s all ease;
-// }
 
 </style>
