@@ -36,7 +36,7 @@ export default {
     page() {
       return this.$store.state.page
     }
-  }
+  },
 //   methods: {
 //     link_commit(linkPath) {
 //       this.$store.commit('pagePathSet', linkPath)
