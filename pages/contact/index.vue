@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <div class="container">
     <h1>contact content</h1>
     <h1>email:hiramatsu3300@gmail.com</h1>
     <h1>Hiramatsu Works: </h1>
@@ -18,12 +18,33 @@
         Contact
       </nuxt-link>
     </div>
-  </section>
+    <transition appear name="transitionScreen">
+      <TransitionScreen v-if="page === '/contact'" />
+    </transition>
+  </div>
 </template>
+
 <script>
+import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 export default {
-  layout: 'topPage'
-//   transition: 'content-slide'
+  layout: 'topPage',
+  //   transition: 'content-slide',
+  components: {
+    TransitionScreen
+  },
+  computed: {
+    page() {
+      return this.$store.state.page
+    }
+  }
+//   methods: {
+//     link_commit(linkPath) {
+//       this.$store.commit('pagePathSet', linkPath)
+//       setTimeout(() => {
+//           this.$router.push({ path: link_path });
+//       }, 500)
+//     }
+//   }
 }
 </script>
 <style scoped lang="scss">

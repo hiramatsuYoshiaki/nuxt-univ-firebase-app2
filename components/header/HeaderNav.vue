@@ -4,20 +4,20 @@
       <div class="m-menu-wrap">
         <div class="menu_items menu_items_column">
           <div class="menu-item-box">
-            <div class="menu_link" :class="{ menu_item_visible: menuVisible === 'works' }" @click="linkAction('works')">
+            <div class="menu_link" :class="{ menu_item_visible: page === '/works' }" @click="link_commit('/works')">
               WORKS
             </div>
             <div class="menu_underline" />
           </div>
           <div class="menu-item-box">
-            <div class="menu_link" :class="{ menu_item_visible: menuVisible === 'about' }" @click="linkAction('about')">
+            <div class="menu_link" :class="{ menu_item_visible: page === '/about' }" @click="link_commit('/about')">
               ABOUT
             </div>
             <div class="menu_underline" />
           </div>
           <div class="menu-item-box">
-            <div class="menu_link" :class="{ menu_item_visible: menuVisible === 'contact' }" @click="linkAction('contact')">
-              CONTACT
+            <div class="menu_link" :class="{ menu_item_visible: page === '/contact' }" @click="link_commit('/contact')">
+              CONTACT page:{{ page }}
             </div>
             <div class="menu_underline" />
           </div>
@@ -27,9 +27,9 @@
     <div class="nav-menu">
       <div class="block left-block">
         <div class="logo-wrap">
-          <nuxt-link to="/">
+          <a @click="link_commit('/')">
             <img class="logo-img" src="~/assets/img/logo/h-works1200x600white.svg" alt="h-works logo">
-          </nuxt-link>
+          </a>
         </div>
       </div>
       <div class="block center-block" />
@@ -37,21 +37,21 @@
         <div class="m-menu-wrap menu-display">
           <div class="menu_items menu_items_row">
             <div class="menu-item-box">
-              <nuxt-link to="/works" class="menu_link" :class="{ menu_item_visible: menuVisible === 'works' }">
+              <a class="menu_link" :class="{ menu_item_visible: page === '/works' }" @click="link_commit('/works')">
                 WORKS
-              </nuxt-link>
+              </a>
               <div class="menu_underline" />
             </div>
             <div class="menu-item-box">
-              <nuxt-link to="/about" class="menu_link" :class="{ menu_item_visible: menuVisible === 'about' }">
+              <a class="menu_link" :class="{ menu_item_visible: page === '/about' }" @click="link_commit('/about')">
                 ABOUT
-              </nuxt-link>
+              </a>
               <div class="menu_underline" />
             </div>
             <div class="menu-item-box">
-              <nuxt-link to="/contact" class="menu_link" :class="{ menu_item_visible: menuVisible === 'contact' }">
-                CONTACT
-              </nuxt-link>
+              <a class="menu_link" :class="{ menu_item_visible: page === '/contact' }" @click="link_commit('/contact')">
+                CONTACT page:{{ page }}
+              </a>
               <div class="menu_underline" />
             </div>
           </div>
@@ -77,13 +77,18 @@ export default {
   },
   data() {
     return {
-      active: true,
-      menuVisible: ''
+      active: true
+    }
+  },
+  computed: {
+    page() {
+      return this.$store.state.page
     }
   },
   methods: {
-    linkAction(linkPath) {
+    link_commit(linkPath) {
       this.active = true
+      this.$store.commit('pagePathSet', linkPath)
       setTimeout(() => {
         this.$router.push({ path: linkPath })
       }, 500)
@@ -92,7 +97,6 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-// @import "~/assets/sass/variable.scss";
 %center{
     display:flex;
     justify-content: center;
@@ -113,23 +117,12 @@ export default {
     top: 0;
     left: 0;
     width:100vw;
-    // height:100%;
     z-index: 1000;
-    // height: $header-height;
-    // background-color: transparent;
-    // color: $header-text;
     border-bottom:1px solid rgba(250,250,250,.1);
-    // cursor: pointer;
     background-color: #212121;
     margin:0;
     padding:0;
-    // transform: translateY(-90%);
-    // &:hover{
-    //     transform: translateY(-90%);
-    // }
-    // @media(min-width: 992px){
-    //   font-size: 4.0rem;
-    // }
+
 }
 //nav-menu---------------------------------------
 .nav-menu{
@@ -142,7 +135,6 @@ export default {
     flex-direction: row;
 }
 .nav-menu .block{
-    // border: 1px solid gray;
     width: 33.333%;
     height:100%;
 }
@@ -204,7 +196,6 @@ export default {
     width: 100%;
     height: 2px;
     margin-top: .2rem;
-    // transition: .1s all ease-in;
     transform: translateX(-101%);
   }
   &:hover{
@@ -234,17 +225,13 @@ export default {
     width:100vw;
     height: calc(100vh + #{ $header-height });
     background-color:rgba(0,0,0,1);
-    // transition: .1s ;
-    // transform: translateY(-100vh);
     @extend %center;
 }
 .v_open_menu{
-  // opacity: 0;
   transform: translateY(-100vh) ;
   transition: .5s .5s all ease;
 }
 .v_close_menu{
-  // opacity: 1;
   transform: translateY(0) ;
   transition: .5s .5s all ease;
 }

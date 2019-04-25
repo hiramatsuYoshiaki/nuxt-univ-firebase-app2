@@ -1,6 +1,6 @@
 <template>
-  <section class="container">
-    <h1>contact about</h1>
+  <div class="container">
+    <h1>about content</h1>
     <div class="links">
       <nuxt-link to="/">
         HOME
@@ -33,12 +33,32 @@
         <div>https://romantic-kare-6d357c.netlify.com</div>
       </a>
     </div>
-  </section>
+    <transition appear name="transitionScreen">
+      <TransitionScreen v-if="page === '/about'" />
+    </transition>
+  </div>
 </template>
 <script>
+import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 export default {
-  layout: 'topPage'
-//   transition: 'content-slide'
+  layout: 'topPage',
+  //   transition: 'content-slide',
+  components: {
+    TransitionScreen
+  },
+  computed: {
+    page() {
+      return this.$store.state.page
+    }
+  }
+//   methods: {
+//     link_commit(linkPath) {
+//       this.$store.commit('pagePathSet', linkPath)
+//       setTimeout(() => {
+//           this.$router.push({ path: link_path });
+//       }, 500)
+//     }
+//   }
 }
 </script>
 <style scoped lang="scss">
