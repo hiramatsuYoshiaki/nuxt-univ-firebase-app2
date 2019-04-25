@@ -1,12 +1,18 @@
 # nuxt-univ-app1
 
 > My peachy Nuxt.js project
+## reate-nuxt-app
+```
+$ npx create-nuxt-app <project-name>
+
+$ npm run dev
+```
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-$ npm install
+$ npm install 
 
 # serve with hot reload at localhost:3000
 $ npm run dev
@@ -21,6 +27,9 @@ $ npm run generate
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
 
+***
+# nuxt.config.js setting
+> nuxt.config.jsでの導入時の設定
 # eslint
 ✖ 7 problems (7 errors, 0 warnings) 
   7 errors, 0 warnings potentially fixable with the `--fix` option. 
@@ -193,3 +202,160 @@ routes
 サイトマップに含めるURLを追加する。
 基本的にはgenerateオプションのroutesと同じように記述すればOK
 上のコードはAPIから記事の一覧を取得して、記事毎のURLをroutesに追加する例。
+
+
+***
+# eslintrc.js
+## console.logの使用
+```
+    rules: {
+        'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    }
+```
+***
+# layouts
+> layouts ディレクトリ関連 
+## カスタムレイアウト
+1. layouts ディレクトリに新規レイアウト(layouts/topPage.vue)を作成を作成する。 
+```
+    <template>
+    <div class="topPage">
+        <HeaderNav />
+        <nuxt />
+    </div>
+    </template>
+    <script>
+    import HeaderNav from '~/components/header/HeaderNav.vue'
+    export default {
+    layout: 'topPage',
+    components: {
+        HeaderNav
+    }
+    }
+    </script>
+    <style scoped lang="scss">
+    </style>
+
+```
+2. ページ (pages/works/index.vue ) で、カスタムレイアウトを使うことを伝えます
+```
+<script>
+export default {
+  layout: 'topPage',
+}
+</script>
+
+```
+
+***
+# components
+> componentsディレクトリ関連 
+
+***
+# page
+> pageディレクトリ関連 
+## transition プロパティ
+1. 特定のページ遷移のトランジション 
+```
+export default {
+  transition: 'content'
+}
+```
+```
+//コンテンツ全体をスライド
+.content-slide-enter-active, .content-slide-leave-active {
+    transition: all 1s;
+}
+.content-slide-enter, .content-slide-leave-to {
+    transform: translateX(100vw) ;
+}
+```
+2. すべてのページ遷移のトランジション 
+```
+//アプリケーションのすべてのページでフェードさせるトランジション
+ .page-enter-active, .page-leave-active {
+     transition: opacity .5s;
+ }
+ .page-enter, .page-leave-to {
+     opacity: 0;
+ }
+
+```
+## head メソッド
+1. 個別のページへのHTMLのheadタグを設定する 
+```
+<script>
+export default {
+  data() {
+    return {
+      pageTitle: 'Works Content'
+    }
+  },
+  head() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
+        { hid: 'description',
+          name: 'Works by Nuxt.js',
+          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したWebサイトを紹介しています。' }
+      ]
+    }
+  },
+}
+</script>
+```
+***
+# store
+> storeディレクトリ関連  
+## モジュールモード
+`store/index.js`
+```
+export const state = () => ({
+  page: 'home'
+})
+
+export const mutations = {
+
+  pagePathSet(state, payload) {
+    state.page = payload
+  },
+}
+```
+`pages/works/index.vue`
+```
+<template>
+  <div class="container">
+    <div class="content-footer">
+      <nav class="links">
+        <a class="menu_link" @click="link_commit('/works')">
+          WORKS
+        </a>
+        <a class="menu_link" @click="link_commit('/about')">
+          ABOUT
+        </a>
+        <a class="menu_link" @click="link_commit('/contact')">
+          CONTACT
+        </a>
+      </nav>
+    </div>
+  </div>
+</template>
+<script>
+  computed: {
+    page() {
+      return this.$store.state.page
+    }
+  },
+  methods: {
+    link_commit(linkPath) {
+      this.$store.commit('pagePathSet', linkPath)
+      setTimeout(() => {
+        this.$router.push({ path: linkPath })
+      }, 500)
+    }
+  }
+}
+</script>
+```

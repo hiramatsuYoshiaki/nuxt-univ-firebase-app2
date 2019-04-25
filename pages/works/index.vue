@@ -12,7 +12,8 @@
     </div>
 
     <div class="content-header">
-      <h1>works content-header</h1>
+      <h1>{{ pageTitle }}}</h1>
+      <h3>works content-header</h3>
     </div>
 
     <transition name="mainCon" appear>
@@ -56,7 +57,19 @@ export default {
   },
   data() {
     return {
-      img: require('~/assets/img/fuji1.jpg')
+      img: require('~/assets/img/fuji1.jpg'),
+      pageTitle: 'Works Content'
+    }
+  },
+  head() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
+        { hid: 'description',
+          name: 'Works by Nuxt.js',
+          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したWebサイトを紹介しています。' }
+      ]
     }
   },
   computed: {
