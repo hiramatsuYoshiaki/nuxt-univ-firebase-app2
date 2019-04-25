@@ -12,16 +12,23 @@
     </div>
 
     <div class="content-header">
-      <h1>{{ pageTitle }}}</h1>
-      <h3>works content-header</h3>
+      <!-- <h1>{{ pageTitle }}</h1>
+      <h3>works content-header</h3> -->
+      <ContentHeader
+        :page-title="pageTitle"
+        :page-sub-title="pageSubTitle"
+        :page-discription="pageDiscription"
+        :page-discription-detail="pageDiscriptionDetail"
+      />
     </div>
 
     <transition name="mainCon" appear>
-      <div class="main-content">
+      <div class="content-main">
         <h1>works content</h1>
         page:{{ page }}
       </div>
     </transition>
+
     <div class="content-footer">
       <nav class="links">
         <a class="menu_link" @click="link_commit('/works')">
@@ -41,6 +48,7 @@
         © 2019 h-works.
       </div>
     </div>
+
     <transition appear name="transitionScreen">
       <TransitionScreen v-if="page === '/works'" />
     </transition>
@@ -49,16 +57,21 @@
 
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
+import ContentHeader from '~/components/content/ContentHeader.vue'
 export default {
   layout: 'topPage',
   //   transition: 'content-slide'
   components: {
-    TransitionScreen
+    TransitionScreen,
+    ContentHeader
   },
   data() {
     return {
       img: require('~/assets/img/fuji1.jpg'),
-      pageTitle: 'Works Content'
+      pageTitle: 'Works Content',
+      pageSubTitle: 'Seamless Page Transition Demo',
+      pageDiscription: 'overview',
+      pageDiscriptionDetail: 'overviewoverviewoverviewoverview'
     }
   },
   head() {
@@ -118,9 +131,10 @@ export default {
 .content-header{
     width:100vw;
     height: 35vh;
+    padding: 1rem 1rem;
 }
 
-.main-content{
+.content-main{
   height: 75vh;
   width:100vw;
 //   height:100%;
@@ -176,10 +190,6 @@ section{
   width: 100%;
   height: 100%;
   overflow: hidden;
-
-//横スクロール処理
-  // width: auto;
-  // min-width: 100vw;
   width: 100vw;
 }
 .bgImage{
@@ -187,8 +197,6 @@ section{
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  // width: 100%;
-  // height: 100%;
   width: 100vw;
   height: 100vh;
   transform-origin:  center ;
@@ -202,20 +210,6 @@ section{
       min-height: 100%;
       width: auto;
       height: auto;
-
-      //横スクロール処理
       min-width: 100vw;
   }
-
-.bgTran-enter-active, .bgTran-leave-active {
-    // transition: all .5s  .5s  ease-out;
-     //transition: all .5s  .5s  cubic-bezier(0.320, 0.625, 0.580, 1.000);//sharp
-     transition: all .5s  .5s  cubic-bezier(0.170, 0.935, 0.305, 1.000)//stylish
-    // transition: all .5s  .5s  cubic-bezier(0.330, 1.700, 0.510, 0.820);//bounds
-     //transition: all .5s  .5s  cubic-bezier(0.545, 0.080, 0.520, 0.975);//soft
-}
-.bgTran-enter, .bgTran-leave-to {
-    opacity: .5;
-    transform: scale(1.2);
-}
 </style>
