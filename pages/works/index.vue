@@ -24,30 +24,34 @@
 
     <transition name="mainCon" appear>
       <div class="content-main">
-        <h1>works content</h1>
-        page:{{ page }}
+        <ContentMain />
+        <!-- <h1>works content</h1>
+        page:{{ page }} -->
       </div>
     </transition>
 
-    <div class="content-footer">
-      <nav class="links">
-        <a class="menu_link" @click="link_commit('/works')">
-          WORKS
-        </a>
-        <a class="menu_link" @click="link_commit('/about')">
-          ABOUT
-        </a>
-        <a class="menu_link" @click="link_commit('/contact')">
-          CONTACT
-        </a>
-      </nav>
-      <div class="footer-sepalater">
-        <div class="line" />
+    <transition name="mainCon" appear>
+      <div class="content-footer">
+        <ContentFooter />
+        <!-- <nav class="links">
+          <a class="menu_link" @click="link_commit('/works')">
+            WORKS
+          </a>
+          <a class="menu_link" @click="link_commit('/about')">
+            ABOUT
+          </a>
+          <a class="menu_link" @click="link_commit('/contact')">
+            CONTACT
+          </a>
+        </nav>
+        <div class="footer-sepalater">
+          <div class="line" />
+        </div>
+        <div>
+          © 2019 h-works.
+        </div> -->
       </div>
-      <div>
-        © 2019 h-works.
-      </div>
-    </div>
+    </transition>
 
     <transition appear name="transitionScreen">
       <TransitionScreen v-if="page === '/works'" />
@@ -58,12 +62,16 @@
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 import ContentHeader from '~/components/content/ContentHeader.vue'
+import ContentMain from '~/components/content/ContentMain.vue'
+import ContentFooter from '~/components/content/ContentFooter.vue'
 export default {
   layout: 'topPage',
   //   transition: 'content-slide'
   components: {
     TransitionScreen,
-    ContentHeader
+    ContentHeader,
+    ContentMain,
+    ContentFooter
   },
   data() {
     return {
@@ -145,11 +153,9 @@ export default {
   // min-width: 100vw;
   padding-bottom:20rem;
   padding-left: 2rem;
-
 }
 .content-footer{
   width: 100vw;
-  margin-top:4rem;
   @extend %center;
   flex-direction: column;
 }
