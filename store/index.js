@@ -1,17 +1,4 @@
-// export const state = () => ({
-//   counter: 0
-// })
 
-// export const mutations = {
-//   increment(state) {
-//     state.counter++
-//   }
-// }
-
-/**
- * store/counter.js
- * このファイル名がcounter.jsなので、モジュール名はcounterになる。
- */
 export const state = () => ({
 //   count: 123,
   page: 'home'
