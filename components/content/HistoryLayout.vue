@@ -1,6 +1,6 @@
 <template>
-  <div class="contentMain">
-    Main
+  <div class="historyLayout">
+    historyLayout
   </div>
 </template>
 <script>
@@ -33,7 +33,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.contentMain{
+.historyLayout{
   position: relative;
   width: 100%;
   height: 100%;
@@ -41,10 +41,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 2rem 2rem;
-  @media (min-width: 768px) {
-      padding: 8rem 8rem;
-  };
+  padding: 2rem;
 }
 
 </style>

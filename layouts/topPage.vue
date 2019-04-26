@@ -14,4 +14,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.topPage{
+  width: auto;
+  min-width: 100vw;
+}
 </style>
