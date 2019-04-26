@@ -1,6 +1,16 @@
 <template>
-  <div class="contentMain">
-    Main
+  <div class="one">
+    <h1>One Column Content</h1>
+    <p>このコンポーネントは、１コラムのレイアウトでできています。</p>
+    <div>
+      <ul>
+        <li>min-width:0 -- padding: 2rem 2rem;</li>
+        <li>min-width:576 -- padding: 2rem 2rem;</li>
+        <li>min-width:768 -- padding: 8rem 8rem;</li>
+        <li>min-width:992 -- padding: 8rem 8rem;</li>
+        <li>min-width:1200 -- padding: 8rem 8rem;</li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -33,7 +43,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.contentMain{
+.one{
   position: relative;
   width: 100%;
   height: 100%;
@@ -45,6 +55,7 @@ export default {
   @media (min-width: 768px) {
       padding: 8rem 8rem;
   };
+  border: 1px solid  rgba(0,0,0,.2);
 }
 
 </style>

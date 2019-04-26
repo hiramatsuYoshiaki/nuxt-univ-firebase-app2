@@ -29,19 +29,19 @@ export default {
   props: {
     pageTitle: {
       type: String,
-      default: 'a'
+      default: ''
     },
     pageSubTitle: {
       type: String,
-      default: 'b'
+      default: ''
     },
     pageDiscription: {
       type: String,
-      default: 'c'
+      default: ''
     },
     pageDiscriptionDetail: {
       type: String,
-      default: 'd'
+      default: ''
     }
   }
 //     data() {
@@ -74,7 +74,10 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 2rem;
+  padding: 2rem 2rem;
+  @media (min-width: 768px) {
+      padding: 8rem 8rem;
+  };
 }
 .transition-box{
   width: 100%;

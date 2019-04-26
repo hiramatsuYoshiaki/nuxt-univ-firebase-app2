@@ -24,7 +24,10 @@
 
     <transition name="mainCon" appear>
       <div class="content-main">
-        <ContentMain />
+        <WorksIntro />
+        <!-- <One />
+        <Two /> -->
+        <!-- <ContentMain /> -->
         <!-- <h1>works content</h1>
         page:{{ page }} -->
       </div>
@@ -33,23 +36,6 @@
     <transition name="mainCon" appear>
       <div class="content-footer">
         <ContentFooter />
-        <!-- <nav class="links">
-          <a class="menu_link" @click="link_commit('/works')">
-            WORKS
-          </a>
-          <a class="menu_link" @click="link_commit('/about')">
-            ABOUT
-          </a>
-          <a class="menu_link" @click="link_commit('/contact')">
-            CONTACT
-          </a>
-        </nav>
-        <div class="footer-sepalater">
-          <div class="line" />
-        </div>
-        <div>
-          © 2019 h-works.
-        </div> -->
       </div>
     </transition>
 
@@ -62,7 +48,11 @@
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 import ContentHeader from '~/components/content/ContentHeader.vue'
-import ContentMain from '~/components/content/ContentMain.vue'
+import WorksIntro from '~/components/content/works/WorksIntro.vue'
+// import One from '~/components/content/One.vue'
+// import Two from '~/components/content/Two.vue'
+// import ContentMain from '~/components/content/ContentMain.vue'
+// import HistoryLayout from '~/components/content/HistoryLayout.vue'
 import ContentFooter from '~/components/content/ContentFooter.vue'
 export default {
   layout: 'topPage',
@@ -70,7 +60,11 @@ export default {
   components: {
     TransitionScreen,
     ContentHeader,
-    ContentMain,
+    WorksIntro,
+    // One,
+    // Two,
+    // HistoryLayout,
+    // ContentMain,
     ContentFooter
   },
   data() {
@@ -129,63 +123,31 @@ export default {
   width: 100vw;
   height: 100%;
   margin-top: $header-height;
-  padding: 2rem;
-  @media (min-width: 992px){
-    padding: 5rem;
-  }
   @extend %center;
   flex-direction: column;
+  border: 1px solid green;
 }
 .content-header{
     width:100vw;
     height: 35vh;
-    padding: 1rem 1rem;
+    // padding: 1rem 1rem;
+    border: 1px solid yellow;
 }
-
 .content-main{
-  height: 75vh;
+  // height: 75vh;
   width:100vw;
-//   height:100%;
   background-color: $main-contents-color;
   color: $main-contents-text;
-  //横スクロール処理
-  // width: auto;
-  // min-width: 100vw;
-  padding-bottom:20rem;
-  padding-left: 2rem;
+  // padding-bottom:20rem;
+  // padding-left: 2rem;
+  border: 1px solid orangered;
 }
 .content-footer{
   width: 100vw;
   @extend %center;
   flex-direction: column;
-}
-section{
-  margin-top:2rem;
-}
-.links{
-  @extend %center;
-}
-.links a{
-  display: inline-block;
-  margin: 0 2rem;
-  cursor: pointer;
-}
-// footer-------------------------------
+  border: 1px solid red;
 
-.content-footer nav{
-  margin-top: 2rem;
-}
-.footer-sepalater{
- width: 100%;
- height: 2rem;
- display: flex;
- justify-content: center;
- align-items: center;
-}
-.footer-sepalater .line{
-  width:80%;
-  height: 1px;
-  background-color: #fff;
 }
 //bg --------------------------------------
 .bgImageFull{

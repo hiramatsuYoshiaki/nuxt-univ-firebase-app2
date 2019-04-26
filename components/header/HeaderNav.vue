@@ -17,7 +17,7 @@
           </div>
           <div class="menu-item-box">
             <div class="menu_link" :class="{ menu_item_visible: page === '/contact' }" @click="link_commit('/contact')">
-              CONTACT page:{{ page }}
+              CONTACT
             </div>
             <div class="menu_underline" />
           </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="menu-item-box">
               <a class="menu_link" :class="{ menu_item_visible: page === '/contact' }" @click="link_commit('/contact')">
-                CONTACT page:{{ page }}
+                CONTACT
               </a>
               <div class="menu_underline" />
             </div>
