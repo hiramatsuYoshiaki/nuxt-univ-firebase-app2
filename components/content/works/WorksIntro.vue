@@ -7,7 +7,9 @@
         <div class="mode-text">
           SSR
         </div>
-        <h3>サーバーサイドレンダリング</h3>
+        <h4>サーバーサイドレンダリング</h4>
+        <br>
+        <p />
         <p>nuxt-univ-app1</p>
         <section>
           <a href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
@@ -32,7 +34,9 @@
         <div class="mode-text">
           SPA
         </div>
-        <h3>シングルページアプリケーション</h3>
+        <h4>シングルページアプリケーション</h4>
+        <br>
+        <p />
       </div>
     </div>
   </div>
@@ -103,12 +107,16 @@ export default {
     padding-bottom: 2rem;
 }
 .mode-text{
-    font-size: 20rem;
+    font-size: 8rem;
     font-weight: 700;
     color: green;
+
 }
 a{
     color: black;
+}
+.word-wrap{
+    word-break: break-all;
 }
 
 </style>
