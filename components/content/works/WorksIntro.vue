@@ -7,14 +7,36 @@
         <div class="mode-text">
           SSR
         </div>
-        <h3>サーバーサイドレンダリング</h3>
+        <h4>サーバーサイドレンダリング</h4>
+        <br>
+        <p />
         <p>nuxt-univ-app1</p>
+        <section>
+          <a href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
+            <h3>GitHub</h3>
+            <div class="word-wrap">hiramatsuYoshiaki/nuxt-univ-app1</div>
+            <div class="word-wrap">master/editer</div>
+            <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
+            <div class="word-wrap">GitHub  Page</div>
+            <div class="word-wrap">https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
+          </a>
+        </section>
+        <section>
+          <a href="https://app.netlify.com/sites/romantic-kare-6d357c/overview">
+            <h3>Netlify</h3>
+            <div class="word-wrap">Yoshiaki Hiramatsu team</div>
+            <div class="word-wrap">romantic-kare-6d357c</div>
+            <div class="word-wrap">https://romantic-kare-6d357c.netlify.com</div>
+          </a>
+        </section>
       </div>
       <div class="two-col">
         <div class="mode-text">
           SPA
         </div>
-        <h3>シングルページアプリケーション</h3>
+        <h4>シングルページアプリケーション</h4>
+        <br>
+        <p />
       </div>
     </div>
   </div>
@@ -85,9 +107,16 @@ export default {
     padding-bottom: 2rem;
 }
 .mode-text{
-    font-size: 20rem;
+    font-size: 8rem;
     font-weight: 700;
     color: green;
+
+}
+a{
+    color: black;
+}
+.word-wrap{
+    word-break: break-all;
 }
 
 </style>
