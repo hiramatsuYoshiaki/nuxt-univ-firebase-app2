@@ -131,7 +131,7 @@ export default {
     width:100vw;
     height: 35vh;
     // padding: 1rem 1rem;
-    border: 1px solid yellow;
+    // border: 1px solid yellow;
 }
 .content-main{
   // height: 75vh;
@@ -140,13 +140,13 @@ export default {
   color: $main-contents-text;
   // padding-bottom:20rem;
   // padding-left: 2rem;
-  border: 1px solid orangered;
+  // border: 1px solid orangered;
 }
 .content-footer{
   width: 100vw;
   @extend %center;
   flex-direction: column;
-  border: 1px solid red;
+  // border: 1px solid red;
 
 }
 //bg --------------------------------------
