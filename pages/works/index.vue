@@ -14,7 +14,7 @@
     <div class="content-header">
       <!-- <h1>{{ pageTitle }}</h1>
       <h3>works content-header</h3> -->
-      <ContentHeader
+      <ConHeader
         :page-title="pageTitle"
         :page-sub-title="pageSubTitle"
         :page-discription="pageDiscription"
@@ -53,14 +53,14 @@ import WorksIntro from '~/components/content/works/WorksIntro.vue'
 // import Two from '~/components/content/Two.vue'
 // import ContentMain from '~/components/content/ContentMain.vue'
 // import HistoryLayout from '~/components/content/HistoryLayout.vue'
-import ContentHeader from '~/components/content/ContentHeader.vue'
+import ConHeader from '~/components/content/ConHeader.vue'
 import ContentFooter from '~/components/content/ContentFooter.vue'
 export default {
   layout: 'topPage',
   //   transition: 'content-slide'
   components: {
     TransitionScreen,
-    ContentHeader,
+    ConHeader,
     WorksIntro,
     // One,
     // Two,
