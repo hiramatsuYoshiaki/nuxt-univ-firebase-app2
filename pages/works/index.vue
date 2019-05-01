@@ -14,12 +14,12 @@
     <div class="content-header">
       <!-- <h1>{{ pageTitle }}</h1>
       <h3>works content-header</h3> -->
-      <ContentHeader
+      <!-- <ContentHeader
         :page-title="pageTitle"
         :page-sub-title="pageSubTitle"
         :page-discription="pageDiscription"
         :page-discription-detail="pageDiscriptionDetail"
-      />
+      /> -->
     </div>
 
     <transition name="mainCon" appear>
@@ -47,7 +47,7 @@
 
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
-import ContentHeader from '~/components/content/ContentHeader.vue'
+// import ContentHeader from '~/components/content/ContentHeader.vue'
 import WorksIntro from '~/components/content/works/WorksIntro.vue'
 // import One from '~/components/content/One.vue'
 // import Two from '~/components/content/Two.vue'
@@ -59,7 +59,7 @@ export default {
   //   transition: 'content-slide'
   components: {
     TransitionScreen,
-    ContentHeader,
+    // ContentHeader,
     WorksIntro,
     // One,
     // Two,
