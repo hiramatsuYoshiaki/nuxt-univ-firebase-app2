@@ -1,23 +1,18 @@
 <template>
   <div class="container">
-    <h1>contact content</h1>
-    <h1>email:hiramatsu3300@gmail.com</h1>
-    <h1>Hiramatsu Works: </h1>
-    <h1>contact content:http://tourdehdr.sakuraweb.com/h-works-website/</h1>
-    <div class="links">
-      <nuxt-link to="/">
-        HOME
-      </nuxt-link>
-      <nuxt-link to="/works">
-        Work
-      </nuxt-link>
-      <nuxt-link to="/about">
-        About
-      </nuxt-link>
-      <nuxt-link to="/contact">
-        Contact
-      </nuxt-link>
+    <div class="bgImageFull">
+      <transition name="bgTran" appear>
+        <div
+          class="bgImage"
+          :style="{ 'background-image': 'url(' + img + ') ' }"
+        >
+          <div class="bg_filter" />
+        </div>
+      </transition>
     </div>
+    <transition name="mainCon" appear>
+      <ConContact v-if="page === '/contact'" />
+    </transition>
     <transition appear name="transitionScreen">
       <TransitionScreen v-if="page === '/contact'" />
     </transition>
@@ -26,11 +21,34 @@
 
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
+import ConContact from '~/components/content/contact/ConContact.vue'
 export default {
   layout: 'topPage',
   //   transition: 'content-slide',
   components: {
-    TransitionScreen
+    TransitionScreen,
+    ConContact
+  },
+  data() {
+    return {
+      img: require('~/assets/img/img3668.jpg'),
+      pageTitle: 'Works Content',
+      pageSubTitle: 'Nuxt.js Demo Site',
+      pageDiscription: 'Overview',
+      pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。'
+
+    }
+  },
+  head() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
+        { hid: 'description',
+          name: 'contact by Nuxt.js',
+          content: 'このページは、h-worksの紹介と連絡先です。' }
+      ]
+    }
   },
   computed: {
     page() {
@@ -65,12 +83,15 @@ export default {
 }
 .container{
   width: 100vw;
+  height: calc(100vh - #{ $header-height } );
   margin-top: $header-height;
-  padding: 2rem;
+  padding: 0 2rem;
   @media (min-width: 992px){
-    padding: 5rem;
+    padding: 0 5rem;
   }
+
   @extend %center;
   flex-direction: column;
 }
+
 </style>

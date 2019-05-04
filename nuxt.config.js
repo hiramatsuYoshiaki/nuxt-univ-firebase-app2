@@ -57,6 +57,7 @@ export default {
     '@nuxtjs/style-resources',
     ['@nuxtjs/google-analytics', { id: 'UA-35511262-5' }],
     '@nuxtjs/sitemap',
+    '@nuxtjs/markdownit'
   ],
   styleResources: {
     sass: [
@@ -81,6 +82,18 @@ export default {
       "/about",
       "/contact"
     ]
+  },
+  markdownit: {
+    preset: 'default',
+    injected: true, 
+    breaks: true, 
+    html: true, 
+    linkify: true,
+    typography: true, 
+    xhtmlOut: true,
+    langPrefix: 'language-',
+    quotes: '“”‘’',
+    highlight: function (/*str, lang*/) { return ''; },
   },
     
   /*
