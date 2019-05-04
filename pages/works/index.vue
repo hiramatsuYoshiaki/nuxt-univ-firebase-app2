@@ -10,10 +10,7 @@
         </div>
       </transition>
     </div>
-
     <div class="content-header">
-      <!-- <h1>{{ pageTitle }}</h1>
-      <h3>works content-header</h3> -->
       <ConHeader
         :page-title="pageTitle"
         :page-sub-title="pageSubTitle"
@@ -21,7 +18,6 @@
         :page-discription-detail="pageDiscriptionDetail"
       />
     </div>
-
     <transition name="mainCon" appear>
       <div class="content-main">
         <WorksIntro />
@@ -32,13 +28,11 @@
         page:{{ page }} -->
       </div>
     </transition>
-
     <transition name="mainCon" appear>
       <div class="content-footer">
         <ContentFooter />
       </div>
     </transition>
-
     <transition appear name="transitionScreen">
       <TransitionScreen v-if="page === '/works'" />
     </transition>
@@ -72,9 +66,9 @@ export default {
     return {
       img: require('~/assets/img/fuji1.jpg'),
       pageTitle: 'Works Content',
-      pageSubTitle: 'Seamless Page Transition Demo',
-      pageDiscription: 'overview',
-      pageDiscriptionDetail: 'overviewoverviewoverviewoverview'
+      pageSubTitle: 'Nuxt.js Demo Site',
+      pageDiscription: 'Overview',
+      pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。'
     }
   },
   head() {
@@ -126,7 +120,7 @@ export default {
   margin-top: $header-height;
   @extend %center;
   flex-direction: column;
-  border: 1px solid green;
+  // border: 1px solid green;
 }
 .content-header{
     width:100vw;
@@ -150,35 +144,5 @@ export default {
   // border: 1px solid red;
 
 }
-//bg --------------------------------------
-.bgImageFull{
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  width: 100vw;
-}
-.bgImage{
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  width: 100vw;
-  height: 100vh;
-  transform-origin:  center ;
-}
-.bg_filter{
-      background-color: rgba(0,0,0,.6);
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      min-width: 100vw;
-  }
+
 </style>

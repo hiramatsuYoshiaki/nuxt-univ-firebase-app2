@@ -18,7 +18,7 @@
       </div>
       <div class="transition-box">
         <transition name="carousel-pop-up" appear>
-          <p>{{ pageDiscriptionDetail }} by ConHead.vue</p>
+          <p>{{ pageDiscriptionDetail }} </p>
         </transition>
       </div>
     </section>

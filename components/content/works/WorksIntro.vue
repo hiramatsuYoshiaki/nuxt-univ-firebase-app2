@@ -1,42 +1,70 @@
 <template>
   <div class="worksIntro">
-    <h1>Nuxt.js Demo</h1>
-    <p>Vue.jsのフレームワークNuxt.jsを使ったウェブアプリケーションのデモサイトです</p>
+    <h1>Overview</h1>
+    <p>
+      Vue.jsのフレームワークNuxt.jsを使った
+      サーバーサイドレンダリングのデモサイトです。
+      このウェブアプリケーションは、GithubとNetlifyに連携しています。
+      Githubのブランチにマージすると、
+      Netlifyは自動的に生成しホスティングされます。
+    </p>
+
     <div class="flex-container select-mode">
       <div class="two-col">
         <div class="mode-text">
-          SSR
+          Nuxt.js + SSR
         </div>
-        <h4>サーバーサイドレンダリング</h4>
+        <h5>サーバーサイドレンダリング</h5>
         <br>
         <p />
-        <p>nuxt-univ-app1</p>
+        <!-- <p>nuxt-univ-app1</p> -->
         <section>
-          <a href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
-            <h3>GitHub</h3>
-            <div class="word-wrap">hiramatsuYoshiaki/nuxt-univ-app1</div>
-            <div class="word-wrap">master/editer</div>
-            <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
-            <div class="word-wrap">GitHub  Page</div>
-            <div class="word-wrap">https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
-          </a>
+          <h3>サーバーサイドレンダリング（ユニバーサル SSR）</h3>
+          <p>Nuxt.js をプロジェクトの UI レンダリング全体を担うフレームワークとして使うことができます。nuxt コマンドを実行すると開発サーバーが起動します。このサーバーはホットリローディング及び Vue Server Renderer を備えており、アプリケーションが自動的にサーバーサイドレンダリングするよう設定されています。</p>
         </section>
         <section>
-          <a href="https://app.netlify.com/sites/romantic-kare-6d357c/overview">
-            <h3>Netlify</h3>
-            <div class="word-wrap">Yoshiaki Hiramatsu team</div>
-            <div class="word-wrap">romantic-kare-6d357c</div>
-            <div class="word-wrap">https://romantic-kare-6d357c.netlify.com</div>
-          </a>
+          <h3>静的ファイルの生成</h3>
+          <p>アプリケーションをビルドする際、ルートやストアにあるファイル全てに対し HTML を生成します。</p>
+        </section>
+        <section>
+          <h3>主な機能</h3>
+          <ul>
+            <li>
+              <p>Vue ファイルで記述できること（*.vue）</p>
+              <p>コードを自動的に分割すること</p>
+              <p>サーバーサイドレンダリング</p>
+              <p>非同期データをハンドリングするパワフルなルーティング</p>
+              <p>静的ファイルの配信</p>
+              <p>ES2015+ のトランスパイレーション</p>
+              <p>JS と CSS のバンドル及びミニファイ化</p>
+              <p>head要素の管理</p>
+              <p>開発モードにおけるホットリローディング</p>
+              <p>プリプロセッサ: Sass, Less, Stylus など</p>
+              <p>HTTP/2 push headers ready</p>
+              <p>モジュール構造で拡張できること</p>
+            </li>
+          </ul>
         </section>
       </div>
       <div class="two-col">
         <div class="mode-text">
-          SPA
+          GitHub + netlify
         </div>
-        <h4>シングルページアプリケーション</h4>
+        <h5>バージョン管理と自動ディプロイ</h5>
         <br>
         <p />
+        <section>
+          <h3>バージョン管理</h3>
+          <p>GitHubを利用することで、プロジェクトマネージャと開発者が一箇所で作業を調整、追跡、および更新するので、プロジェクトは透明でスケジュールどおりに維持されます。</p>
+
+          <p>GitHubを利用することで、すべての作業を視覚化し、プロジェクトボードを使用してコードと並行して優先順位を付けます。リポジトリ内または組織全体で、どのようなタスクが計画されているか、または進行中かを確認できます。</p>
+
+          <p>GitHubを利用することで、チームの連携を強化できます。問題を見つけやすくなります。</p>
+        </section>
+        <section>
+          <h3>自動ディプロイ</h3>
+          <p>Netlifyは新しいコミットを検出し、あなたのサイトを自動的に再構築し、そして結果を即時のグローバルアップデートとしてデプロイします。</p>
+        </section>
       </div>
     </div>
   </div>
@@ -105,12 +133,22 @@ export default {
     };
     padding-right: 8rem;
     padding-bottom: 2rem;
+    section{
+      margin-bottom: 2rem;
+    }
+    h3{
+      color:#000000;
+      font-weight: 600;
+    }
+    p{
+      color:rgb(70, 69, 69);
+    }
+
 }
 .mode-text{
     font-size: 8rem;
     font-weight: 700;
     color: green;
-
 }
 a{
     color: black;

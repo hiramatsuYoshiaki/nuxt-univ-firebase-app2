@@ -1,38 +1,34 @@
 <template>
   <div class="container">
-    <h1>about content</h1>
-    <div class="links">
-      <nuxt-link to="/">
-        HOME
-      </nuxt-link>
-      <nuxt-link to="/works">
-        Work
-      </nuxt-link>
-      <nuxt-link to="/about">
-        About
-      </nuxt-link>
-      <nuxt-link to="/contact">
-        Contact
-      </nuxt-link>
+    <div class="bgImageFull">
+      <transition name="bgTran" appear>
+        <div
+          class="bgImage"
+          :style="{ 'background-image': 'url(' + img + ') ' }"
+        >
+          <div class="bg_filter" />
+        </div>
+      </transition>
     </div>
-    <div>
-      <a href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
-        <div>GitHub</div>
-        <div>hiramatsuYoshiaki/nuxt-univ-app1</div>
-        <div>master/editer</div>
-        <div>https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
-        <div>GitHub  Page</div>
-        <div>https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
-      </a>
+    <div class="content-header">
+      <ConHeader
+        :page-title="pageTitle"
+        :page-sub-title="pageSubTitle"
+        :page-discription="pageDiscription"
+        :page-discription-detail="pageDiscriptionDetail"
+      />
     </div>
-    <div>
-      <a href="https://app.netlify.com/sites/romantic-kare-6d357c/overview">
-        <div>Netlify</div>
-        <div>Yoshiaki Hiramatsu team</div>
-        <div>romantic-kare-6d357c</div>
-        <div>https://romantic-kare-6d357c.netlify.com</div>
-      </a>
-    </div>
+    <transition name="mainCon" appear>
+      <div class="content-main">
+        <ConAbout />
+      </div>
+    </transition>
+    <transition name="mainCon" appear>
+      <div class="content-footer">
+        <ContentFooter />
+      </div>
+    </transition>
+
     <transition appear name="transitionScreen">
       <TransitionScreen v-if="page === '/about'" />
     </transition>
@@ -40,25 +36,53 @@
 </template>
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
+import ConAbout from '~/components/content/about/ConAbout.vue'
+
+import ConHeader from '~/components/content/ConHeader.vue'
+import ContentFooter from '~/components/content/ContentFooter.vue'
+
 export default {
   layout: 'topPage',
   //   transition: 'content-slide',
   components: {
-    TransitionScreen
+    TransitionScreen,
+    ConAbout,
+    ConHeader,
+    ContentFooter
+  },
+  data() {
+    return {
+      img: require('~/assets/img/img2722.jpg'),
+      pageTitle: 'About Content',
+      pageSubTitle: 'Demo Site Usage',
+      pageDiscription: 'about setting',
+      pageDiscriptionDetail: 'デモサイトの簡単なセットアップ方法について'
+    }
+  },
+  head() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
+        { hid: 'description',
+          name: 'about by Nuxt.js',
+          content: 'このページは、Nuxt.jsアプリケーションの使用方法を紹介しています。' }
+      ]
+    }
   },
   computed: {
     page() {
       return this.$store.state.page
     }
   }
-//   methods: {
-//     link_commit(linkPath) {
-//       this.$store.commit('pagePathSet', linkPath)
-//       setTimeout(() => {
-//           this.$router.push({ path: link_path });
-//       }, 500)
-//     }
-//   }
+  // methods: {
+  //   link_commit(linkPath) {
+  //     this.$store.commit('pagePathSet', linkPath)
+  //     setTimeout(() => {
+  //       this.$router.push({ path: link_path })
+  //     }, 500)
+  //   }
+  // }
 }
 </script>
 <style scoped lang="scss">
@@ -78,13 +102,33 @@ export default {
     align-items: center;
 }
 .container{
+  position: relative;
   width: 100vw;
+  height: 100%;
   margin-top: $header-height;
-  padding: 2rem;
-  @media (min-width: 992px){
-    padding: 5rem;
-  }
   @extend %center;
   flex-direction: column;
+}
+.content-header{
+    width:100vw;
+    height: 35vh;
+    // padding: 1rem 1rem;
+    // border: 1px solid yellow;
+}
+.content-main{
+  // height: 75vh;
+  width:100vw;
+  background-color: $main-contents-color;
+  color: $main-contents-text;
+  // padding-bottom:20rem;
+  // padding-left: 2rem;
+  // border: 1px solid orangered;
+}
+.content-footer{
+  width: 100vw;
+  @extend %center;
+  flex-direction: column;
+  // border: 1px solid red;
+
 }
 </style>
