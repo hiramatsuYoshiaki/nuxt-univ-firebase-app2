@@ -78,7 +78,7 @@ export default {
         // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
         { hid: 'description',
           name: 'Works by Nuxt.js',
-          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したWebサイトを紹介しています。' }
+          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したWebサイトの概略を紹介しています。' }
       ]
     }
   },

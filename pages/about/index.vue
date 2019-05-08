@@ -66,7 +66,7 @@ export default {
         // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
         { hid: 'description',
           name: 'about by Nuxt.js',
-          content: 'このページは、Nuxt.jsアプリケーションの使用方法を紹介しています。' }
+          content: 'このページは、Nuxt.jsアプリケーションのインストールと使い方と設定を紹介しています。' }
       ]
     }
   },

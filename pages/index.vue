@@ -6,15 +6,22 @@
         h-works
       </h1>
       <h2 class="subtitle">
-        Nuxt.js Universal
+        Nuxt.js Universal SSR
+      </h2>
+      <h2 class="subtitle">
+        GitHub + Netlify
       </h2>
     </div>
     <div class="content">
       <section>
         <a class="github" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
-          <h3>GitHub</h3>
+          <h3>GitHub Code</h3>
           <div class="word-wrap">hiramatsuYoshiaki/nuxt-univ-app1</div>
           <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
+        </a>
+        <a class="github" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1/projects/1">
+          <h3>GitHub Project</h3>
+          <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1/projects/1</div>
         </a>
         <a class="github" href="https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/">
           <h3>GitHub Pages</h3>
@@ -67,6 +74,25 @@ export default {
   components: {
     Logo,
     TransitionScreen
+  },
+  data() {
+    return {
+      img: require('~/assets/img/img1578.jpg'),
+      pageTitle: 'Landing Content',
+      pageSubTitle: 'Nuxt.js Demo Site',
+      pageDiscription: 'Landing',
+      pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。'
+    }
+  },
+  head() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        { hid: 'description',
+          name: 'landing by Nuxt.js',
+          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したデモサイトです。' }
+      ]
+    }
   },
   computed: {
     page() {
@@ -143,6 +169,9 @@ section{
 }
 .word-wrap{
   word-wrap: break-word;
+}
+.title{
+  margin-top:2rem;
 }
 // footer-------------------------------
 .content-footer{

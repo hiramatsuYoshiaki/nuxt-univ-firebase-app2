@@ -39,6 +39,7 @@ For detailed explanation on how things work, checkout [Nuxt.js docs](https://nux
 # nuxt.config.js setting
 > nuxt.config.jsでの導入時の設定
 # eslint
+フォーマットエラー対応
 ✖ 7 problems (7 errors, 0 warnings) 
   7 errors, 0 warnings potentially fixable with the `--fix` option. 
   
@@ -59,7 +60,14 @@ extend(config, ctx) {
 }
 ```
 ex.https://github.com/nuxt/nuxt.js/issues/1628 
+```
+options: {
+fix: true
+       }
+```
  
+ ***
+
 
 
 # cssプロパティ 
@@ -212,15 +220,7 @@ routes
 上のコードはAPIから記事の一覧を取得して、記事毎のURLをroutesに追加する例。
 
 
-***
-# eslintrc.js
-## console.logの使用
-```
-    rules: {
-        'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-    }
-```
+
 ***
 # markdown
 1. markdown-itをインストール 
@@ -279,6 +279,14 @@ export default {
 ```
 ex:https://techblog.scouter.co.jp/entry/2019/01/24/190000 
 
+# eslintrc.js
+## console.logの使用
+```
+    rules: {
+        'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    }
+```
 # layouts
 > layouts ディレクトリ関連 
 ## カスタムレイアウト
@@ -495,7 +503,6 @@ export const mutations = {
    git push -u origin new-branch  
 ```  
 
-
 ## localでいままで作業していたbranchを削除する 
   1.これで削除できます。これはしなくてもいいですが、開発が進んでいくとbranchが増えてbranch一覧がごちゃごちゃしてくるのでやったほうがいいです。  
   ```
@@ -507,9 +514,6 @@ export const mutations = {
 ```
   git pull origin master  
 ```
-
-
-
 
 # netlify 
 1. netlifyログインする。 
