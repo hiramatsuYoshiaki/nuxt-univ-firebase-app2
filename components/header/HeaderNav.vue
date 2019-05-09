@@ -126,7 +126,7 @@ export default {
 }
 //nav-menu---------------------------------------
 .nav-menu{
-    position:absolute;
+    position:fixed;
     top:0;
     left:0;
     width:100vw;
@@ -219,7 +219,7 @@ export default {
 }
 //mobile-menu------------------------------------
 .mobile-menu{
-    position:absolute;
+    position:fixed;
     top:0;
     left:0;
     width:100vw;
@@ -237,7 +237,7 @@ export default {
 }
 //menu-button------------------------------------
 .menu-button{
-    position:absolute;
+    position:fixed;
     top:0;
     right:0;
     width: $header-height;

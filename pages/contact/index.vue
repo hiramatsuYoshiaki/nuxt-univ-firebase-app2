@@ -89,7 +89,6 @@ export default {
   @media (min-width: 992px){
     padding: 0 5rem;
   }
-
   @extend %center;
   flex-direction: column;
 }

@@ -36,8 +36,8 @@
         <div class="menu-item-box">
           <a
             class="menu_link"
-            :class="{ menu_item_visible: page === 'contact' }"
-            @click="link_commit('contact', '/contact')"
+            :class="{ menu_item_visible: page === '/contact' }"
+            @click="link_commit('/contact')"
           >
             CONTACT
           </a>
@@ -48,7 +48,7 @@
     <div class="footer-bottom">
       <div class="footer-bottom-wrap">
         <div class="copy-light">
-          © 2019 h-works. All Rights Reserved
+          © 2019 h-works.
         </div>
         <a href="#top">
           <div>TOP</div>

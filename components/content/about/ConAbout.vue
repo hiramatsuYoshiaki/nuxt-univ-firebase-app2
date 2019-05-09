@@ -23,13 +23,15 @@
 
       <div class="main-col">
         <div v-for="(mdData, index) in mdDatas" :key="index">
-          <h1 class="topMain ">
+          <div class="topMain h1-res">
             {{ mdData.topMenu }}
-          </h1>
+          </div>
 
           <div v-for="(usage, index) in mdData.usages" :key="index">
             <div class="subMainTitle">
-              <h3>{{ usage.title }}</h3>
+              <div class="h3-res">
+                {{ usage.title }}
+              </div>
             </div>
             <div class="subMainDescription">
               <p>{{ usage.Description }}</p>
@@ -756,10 +758,10 @@ export default {
     section{
       margin-bottom: 2rem;
     }
-    h3{
-      color:#000000;
-      font-weight: 600;
-    }
+    // h3{
+    //   color:#000000;
+    //   font-weight: 600;
+    // }
     p{
       color:rgb(70, 69, 69);
     }
@@ -771,21 +773,14 @@ export default {
     @media (min-width: 992px) {
         width: 70%;
         padding-right: 10rem;
+        padding: 2rem;
     };
-    padding: 2rem;
-    // padding-right: 8rem;
-    // padding-bottom: 2rem;
     section{
       margin-bottom: 2rem;
     }
-    h3{
-      color:#000000;
-      font-weight: 600;
-    }
-    p{
-      color:rgb(70, 69, 69);
-    }
-    // border: 1px solid  rgba(0,0,0,.2);
+    // p{
+    //   color:rgb(70, 69, 69);
+    // }
 
 }
 .topMenu{
@@ -799,7 +794,6 @@ export default {
     background-color: lightgreen;
     border-radius: 2px;
     color: red;
-
 }
 .subMneu{
     padding-left: 1.5rem;
@@ -808,55 +802,56 @@ export default {
 .topMain{
     border-bottom: 1px solid green;
     margin: 6rem 2rem 2rem 0;
-    color: rgb(5, 121, 5);
-    font-weight:700;
 
 }
+
 .subMainTitle{
-    h3{
-        color: rgb(53, 53, 53);
-    }
-    margin: 6rem 2rem 2rem 0;
+    margin: 2rem 2rem 2rem 2rem;
+    @media (min-width: 992px) {
+        margin: 6rem 2rem 2rem 2rem;
+    };
 
 }
 .subMainDescription{
-    p{
-        color: gray;
-    }
+    // p{
+    //     color: gray;
+    // }
     margin: 2rem 2rem 2rem 2rem;
-
 }
 .subMainOperation{
-
-    p{
-        color: gray;
-    }
+    // p{
+    //     color: gray;
+    // }
     margin: 2rem 2rem 2rem 2rem;
 }
 .subMainComandWrap{
     background-color: rgb(150, 159, 165);
-    margin: 2rem 2rem 2rem 2rem;
     padding: 1rem;
     border-radius: 2px;
     font-size: 1rem;
 }
 .subMainComand{
     font-size: 1.6rem;
-    // color: red;
-    line-height: 1.8rem;
-    // font-family: $font-family !important;
-    // font-size: $font-size;
-    // line-height: $line-height;
-    // pre code{
-    // font-family: $font-family !important;
-
-    // }
-    // font-family: "Open Sans","Clear Sans","Helvetica Neue",Helvetica,Arial,sans-serif,"Hiragino Kaku Gothic ProN","MS PGothic";
-
+    line-height: 2rem;
 }
-// code{
-//    font-family: $font-family !important;
-//     font-family: "Open Sans","Clear Sans","Helvetica Neue",Helvetica,Arial,sans-serif,"Hiragino Kaku Gothic ProN","MS PGothic";
+.h1-res{
+    color: rgb(5, 121, 5);
+    font-weight:700;
+    font-size: 2rem;
+    @media (min-width: 992px) {
+        font-size: 4rem;
+    };
+}
+.h3-res{
+    color: rgb(53, 53, 53);
+    font-weight:700;
+    font-size: 2rem;
+    @media (min-width: 992px) {
+        font-size: 4rem;
+    };
+}
+p{
+    color:rgb(70, 69, 69);
+}
 
-// }
 </style>

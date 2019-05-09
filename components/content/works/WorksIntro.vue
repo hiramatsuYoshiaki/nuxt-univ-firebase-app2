@@ -11,13 +11,12 @@
 
     <div class="flex-container select-mode">
       <div class="two-col">
-        <div class="mode-text">
-          Nuxt.js + SSR
-        </div>
-        <h5>サーバーサイドレンダリング</h5>
-        <br>
-        <p />
-        <!-- <p>nuxt-univ-app1</p> -->
+        <section>
+          <div class="mode-text">
+            Nuxt.js + SSR
+          </div>
+          <h5>サーバーサイドレンダリング</h5>
+        </section>
         <section>
           <h3>サーバーサイドレンダリング（ユニバーサル SSR）</h3>
           <p>Nuxt.js をプロジェクトの UI レンダリング全体を担うフレームワークとして使うことができます。nuxt コマンドを実行すると開発サーバーが起動します。このサーバーはホットリローディング及び Vue Server Renderer を備えており、アプリケーションが自動的にサーバーサイドレンダリングするよう設定されています。</p>
@@ -29,30 +28,28 @@
         <section>
           <h3>主な機能</h3>
           <ul>
-            <li>
-              <p>Vue ファイルで記述できること（*.vue）</p>
-              <p>コードを自動的に分割すること</p>
-              <p>サーバーサイドレンダリング</p>
-              <p>非同期データをハンドリングするパワフルなルーティング</p>
-              <p>静的ファイルの配信</p>
-              <p>ES2015+ のトランスパイレーション</p>
-              <p>JS と CSS のバンドル及びミニファイ化</p>
-              <p>head要素の管理</p>
-              <p>開発モードにおけるホットリローディング</p>
-              <p>プリプロセッサ: Sass, Less, Stylus など</p>
-              <p>HTTP/2 push headers ready</p>
-              <p>モジュール構造で拡張できること</p>
-            </li>
+            <li><p>Vue ファイルで記述できること（*.vue）</p></li>
+            <li><p>コードを自動的に分割すること</p></li>
+            <li><p>サーバーサイドレンダリング</p></li>
+            <li><p>非同期データをハンドリングするパワフルなルーティング</p></li>
+            <li><p>静的ファイルの配信</p></li>
+            <li><p>ES2015+ のトランスパイレーション</p></li>
+            <li><p>JS と CSS のバンドル及びミニファイ化</p></li>
+            <li><p>head要素の管理</p></li>
+            <li><p>開発モードにおけるホットリローディング</p></li>
+            <li><p>プリプロセッサ: Sass, Less, Stylus など</p></li>
+            <li><p>HTTP/2 push headers ready</p></li>
+            <li><p>モジュール構造で拡張できること</p></li>
           </ul>
         </section>
       </div>
       <div class="two-col">
-        <div class="mode-text">
-          GitHub + netlify
-        </div>
-        <h5>バージョン管理と自動ディプロイ</h5>
-        <br>
-        <p />
+        <section>
+          <div class="mode-text">
+            GitHub + netlify
+          </div>
+          <h5>バージョン管理と自動ディプロイ</h5>
+        </section>
         <section>
           <h3>バージョン管理</h3>
           <p>GitHubを利用することで、プロジェクトマネージャと開発者が一箇所で作業を調整、追跡、および更新するので、プロジェクトは透明でスケジュールどおりに維持されます。</p>
@@ -130,8 +127,9 @@ export default {
     width: 100%;
     @media (min-width: 768px) {
         width: 50%;
+        padding-right: 8rem;
     };
-    padding-right: 8rem;
+    padding-right: 2rem;
     padding-bottom: 2rem;
     section{
       margin-bottom: 2rem;
@@ -139,16 +137,19 @@ export default {
     h3{
       color:#000000;
       font-weight: 600;
+      margin-bottom:2rem;
     }
     p{
       color:rgb(70, 69, 69);
     }
-
 }
 .mode-text{
-    font-size: 8rem;
+    font-size: 4rem;
     font-weight: 700;
     color: green;
+    @media (min-width: 768px) {
+        font-size: 8rem;
+    };
 }
 a{
     color: black;
@@ -156,5 +157,14 @@ a{
 .word-wrap{
     word-break: break-all;
 }
-
+li{
+  margin-bottom:2rem;
+}
+p{
+  word-wrap: break-word;
+  font-size: 1.6rem;
+  @media (min-width: 768px) {
+        font-size: 2rem;
+    };
+}
 </style>
