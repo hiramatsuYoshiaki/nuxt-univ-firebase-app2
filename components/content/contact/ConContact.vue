@@ -56,32 +56,43 @@
   @media (min-width: 768px) {
       padding: 8rem 8rem;
   };
-//   border: 1px solid  rgba(0,0,0,.5);
 }
 .flex-container{
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   @media (min-width: 992px) {
       flex-direction: row;
   };
-//   border: 1px solid green;
+
 }
 .two-col{
     width: 100%;
     height: 100%;
-    padding: 2rem;
+    padding: 2rem 2rem;
     @media (min-width: 992px) {
         width: 50%;
         padding: 8rem;
     };
-    // border: 1px solid red;
     display:flex;
     justify-content: center;
     align-items: center;
+    background-color: $footer-color-color;
+    h1{
+      font-size: 2rem;
+      @media (min-width: 992px) {
+        font-size: 4rem;
+    };
+    }
+    p{
+      font-size: 1.6rem;
+      @media (min-width: 992px) {
+        font-size: 2rem;
+    };
+    }
 }
 
 </style>

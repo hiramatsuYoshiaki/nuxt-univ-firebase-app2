@@ -14,22 +14,22 @@
     </div>
     <div class="content">
       <section>
-        <a class="github" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
+        <a class="github sec-link" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
           <h3>GitHub Code</h3>
           <div class="word-wrap">hiramatsuYoshiaki/nuxt-univ-app1</div>
           <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
         </a>
-        <a class="github" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1/projects/1">
+        <a class="github sec-link" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1/projects/1">
           <h3>GitHub Project</h3>
           <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1/projects/1</div>
         </a>
-        <a class="github" href="https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/">
+        <a class="github sec-link" href="https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/">
           <h3>GitHub Pages</h3>
           <div class="word-wrap">https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
         </a>
       </section>
       <section>
-        <a class="netlify" href="https://nuxt-univ-app1.netlify.com/">
+        <a class="netlify sec-link" href="https://nuxt-univ-app1.netlify.com/">
           <h3>Netlify</h3>
           <div class="word-wrap">Yoshiaki Hiramatsu team</div>
           <div class="word-wrap">nuxt-univ-app1</div>
@@ -37,12 +37,17 @@
         </a>
       </section>
     </div>
-    <div class="content-footer">
+    <transition name="mainCon" appear>
+      <div class="content-footer">
+        <ContentFooter />
+      </div>
+    </transition>
+    <!-- <div class="content-footer">
       <nav class="links">
         <nuxt-link to="/">
           HOME
         </nuxt-link>
-        <nuxt-link to="/works">
+        <nuxt-link to="/works" >
           WORKS
         </nuxt-link>
         <nuxt-link to="/about">
@@ -58,7 +63,7 @@
       <div>
         © 2019 h-works.
       </div>
-    </div>
+    </div> -->
     <transition appear name="transitionScreen">
       <TransitionScreen v-if="page === '/'" />
     </transition>
@@ -68,11 +73,14 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
+import ContentFooter from '~/components/content/ContentFooter.vue'
+
 export default {
   layout: 'topPage',
   // transition: 'content-slide',
   components: {
     Logo,
+    ContentFooter,
     TransitionScreen
   },
   data() {
@@ -155,6 +163,12 @@ section{
     width: 50%;
     .github{
       text-align: right;
+      margin-bottom: 2rem;
+      display: block;
+    }
+    .netlify{
+       margin-bottom: 2rem;
+       display: block;
     }
   }
 
@@ -174,26 +188,34 @@ section{
   margin-top:2rem;
 }
 // footer-------------------------------
+// .content-footer{
+//   width: 100%;
+//   margin-top:4rem;
+//   @extend %center;
+//   flex-direction: column;
+// }
+// .content-footer nav{
+//   margin-top: 2rem;
+// }
+// .footer-sepalater{
+//  width: 100%;
+//  height: 2rem;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+// }
+// .footer-sepalater .line{
+//   width:80%;
+//   height: 1px;
+//   background-color: #fff;
+// }
 .content-footer{
-  width: 100%;
-  margin-top:4rem;
-  @extend %center;
+  width: 100vw;
+  display:flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-}
-.content-footer nav{
-  margin-top: 2rem;
-}
-.footer-sepalater{
- width: 100%;
- height: 2rem;
- display: flex;
- justify-content: center;
- align-items: center;
-}
-.footer-sepalater .line{
-  width:80%;
-  height: 1px;
-  background-color: #fff;
+  margin-bottom: -5rem;
 }
 
 </style>
