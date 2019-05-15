@@ -5,7 +5,7 @@
   "author": "hiramatsu",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt -p 3001",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -18,7 +18,10 @@
     "@nuxtjs/markdownit": "^1.2.4",
     "@nuxtjs/sitemap": "^1.0.0",
     "cross-env": "^5.2.0",
-    "nuxt": "^2.6.3"
+    "firebase": "^6.0.2",
+    "nuxt": "^2.6.3",
+    "vue": "^2.6.10",
+    "vuexfire": "^2.3.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

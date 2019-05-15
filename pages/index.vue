@@ -36,34 +36,144 @@
           <div class="word-wrap">https://nuxt-univ-app1.netlify.com/</div>
         </a>
       </section>
+      <section>
+        <button style="color:black" @click="increment(100)">
+          <!-- counter : {{ counter }} -->
+          counter : {{ cnt }}
+        </button>
+        <ul>
+          <li v-for="(list, index) in lists" :key="index">
+            <input
+              :checked="list.done"
+              type="checkbox"
+              @change="toggle(list)"
+            >
+            <span :class="{ done: list.done }">
+              {{ list.text }} : {{ list.done }}
+            </span>
+            <button style="color:black" @click="remove(list)">
+              delete
+            </button>
+          </li>
+          <li>
+            <input
+              style="color:black"
+              placeholder="What needs to be done?"
+              @keyup.enter="addTodo"
+            >
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Articles</h2>
+        <ul>
+          <li v-for="(article, index) in articles" :key="index">
+            <span>{{ article }}</span>
+          </li>
+        </ul>
+        <h2>Comments <small>(nested under articles)</small></h2>
+        <ul>
+          <li v-for="(comment, index) in comments" :key="index">
+            <span>{{ comment }}</span>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>fetch メソッド</h2>
+        <h3>Stars: {{ $store.state.stars }}</h3>
+      </section>
+      <section>
+        <h2>asyncData</h2>
+        <h3><pre>App Datas: {{ jsonAll }}</pre></h3>
+      </section>
+      <section>
+        <h2>firebase</h2>
+        <h3><pre>items: {{ items }}</pre></h3>
+        <!-- <div id="item"> -->
+        <input v-model="todoText" type="text" style="color:black" @keyup.enter="addTodoFirebase">
+        <li v-for="item in items" :key="item.key">
+          {{ item.title }}
+          <button style="color: black" @click="removeTodoFirebase(item['.key'])">
+            del
+          </button>
+        </li>
+        <!-- </div> -->
+      </section>
+      <!-- <section>
+        <h3>Google Login</h3>
+        <div v-if="isWaiting">
+          <p>読み込み中</p>
+        </div>
+        <div v-else>
+          <div v-if="!isLogin">
+            <button style="color:black" @click="googleLogin">
+              Googleでログイン
+            </button>
+          </div>
+          <div v-else>
+            <p>{{ user.email }}でログイン中</p>
+            <button style="color:black" @click="logOut">
+              ログアウト
+            </button>
+          </div>
+        </div>
+      </section> -->
+      <section>
+        <section>
+          <h3>Google Auth mail</h3>
+          <div v-if="isWaiting">
+            <p>読み込み中</p>
+          </div>
+          <div v-else>
+            <div v-if="!isLogin">
+              <div>
+                <p>
+                  <input
+                    v-model="email"
+                    style="color:black"
+                    type="text"
+                    placeholder="email"
+                  >
+                </p>
+                <p>
+                  <input
+                    v-model="password"
+                    style="color:black"
+                    type="password"
+                    placeholder="password"
+                  >
+                </p>
+                <p>
+                  <input
+                    id="checkbox"
+                    v-model="register"
+                    style="color:black"
+                    type="checkbox"
+                  >
+                  <label for="checkbox">新規登録</label>
+                </p>
+                <button style="color:black" @click="passwordLogin">
+                  {{ register ? '新規登録' : 'ログイン' }}
+                </button>
+                <p>{{ errorMessage }}</p>
+              </div>
+            </div>
+            <div v-else>
+              <p>{{ user.email }}でログイン中</p>
+              <button style="color:black" @click="logOut">
+                ログアウト
+              </button>
+            </div>
+          </div>
+        </section>
+      </section>
     </div>
     <transition name="mainCon" appear>
       <div class="content-footer">
         <ContentFooter />
       </div>
     </transition>
-    <!-- <div class="content-footer">
-      <nav class="links">
-        <nuxt-link to="/">
-          HOME
-        </nuxt-link>
-        <nuxt-link to="/works" >
-          WORKS
-        </nuxt-link>
-        <nuxt-link to="/about">
-          ABOUT
-        </nuxt-link>
-        <nuxt-link to="/contact">
-          CONTACT
-        </nuxt-link>
-      </nav>
-      <div class="footer-sepalater">
-        <div class="line" />
-      </div>
-      <div>
-        © 2019 h-works.
-      </div>
-    </div> -->
+
     <transition appear name="transitionScreen">
       <TransitionScreen v-if="page === '/'" />
     </transition>
@@ -71,9 +181,13 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import Logo from '~/components/Logo.vue'
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 import ContentFooter from '~/components/content/ContentFooter.vue'
+import axios from 'axios'
+import { ADD_TODO, REMOVE_TODO, INIT_TODO } from '~/store/actionTypes'
+import firebase from '@/plugins/firebase'
 
 export default {
   layout: 'topPage',
@@ -89,7 +203,9 @@ export default {
       pageTitle: 'Landing Content',
       pageSubTitle: 'Nuxt.js Demo Site',
       pageDiscription: 'Landing',
-      pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。'
+      pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。',
+      // todoText: { title: 'todo-xxx', dane: false },
+      todoText: ''
     }
   },
   head() {
@@ -102,9 +218,151 @@ export default {
       ]
     }
   },
+  asyncData() {
+    return {
+      // google login
+      isWaiting: true,
+      isLogin: false,
+      user: [],
+      // mail login
+      register: false,
+      email: '',
+      password: '',
+      errorMessage: ''
+    }
+  },
+  async fetch({ store, params }) {
+    // const { data } = await axios.get('~/static/json/posy.json')
+    const { data } = await axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    store.commit('setStars', data)
+  },
+  mounted: function () {
+    // goolge login, mail login
+    firebase.auth().onAuthStateChanged((user) => {
+      this.isWaiting = false
+      if (user) {
+        this.isLogin = true
+        this.user = user
+        console.log('login')
+      } else {
+        this.isLogin = false
+        this.user = []
+        console.log('logout')
+      }
+    })
+  },
+  // created() {
+  // this.$store.dispatch('setItemsRef', { ref: db.ref('meetups') })
+  // },
+  created() {
+    // firebase
+    this.$store.dispatch(INIT_TODO)
+  },
+
   computed: {
-    page() {
-      return this.$store.state.page
+    // page() {
+    //   return this.$store.state.page
+    // },
+    ...mapState([
+      'page'
+      // 'counter'
+    ]),
+
+    // counter() {
+    //   return this.$store.state.inc.counter
+    // },
+    // ...mapState({
+    //   counter: state => state.inc.conuter
+    // }),
+    // ...mapState('inc', [
+    //   'counter'
+    // ]),
+    ...mapState('inc', {
+      cnt: 'counter'
+    }),
+
+    // lists() {
+    //   return this.$store.state.inc.lists
+    // },
+    // ...mapState({
+    //   lists: state => state.inc.lists
+    // }),
+    // ...mapState('inc', [
+    //   'lists'
+    // ]),
+    ...mapState('inc', {
+      lists: 'lists'
+    }),
+    ...mapGetters({
+      articles: 'articles/get',
+      comments: 'articles/comments/get'
+    }),
+
+    // jsonAll() {
+    //   return this.$store.state.json.data
+    // },
+    ...mapGetters({
+      jsonAll: 'json/getAll'
+    }),
+    // firebase
+    ...mapState(['items'])
+  },
+
+  methods: {
+    // increment() {
+    //   this.$store.commit('inc/increment', 100)
+    // },
+    ...mapMutations('inc', [
+      'increment'
+    ]),
+    // toggle(todo) {
+    //   this.$store.commit('inc/toggle', todo)
+    // },
+    // remove(todo) {
+    //   this.$store.commit('inc/remove', todo)
+    // },
+    ...mapMutations('inc', ['toggle', 'remove']),
+    addTodo(e) {
+      const text = e.target.value
+      if (text.trim()) {
+        this.$store.commit('inc/add', { text })
+      }
+      e.target.value = ''
+    },
+    // firebase
+    addTodoFirebase() {
+      this.$store.dispatch(ADD_TODO, { title: this.todoText, done: false })
+      this.todoText = ''
+    },
+    removeTodoFirebase(key) {
+      this.$store.dispatch(REMOVE_TODO, key)
+    },
+    // google login
+    // googleLogin() {
+    //   const provider = new firebase.auth.GoogleAuthProvider()
+    //   firebase.auth().signInWithRedirect(provider)
+    // },
+    // logOut() {
+    //   firebase.auth().signOut()
+    // }
+    // mail login password
+    passwordLogin() {
+      const email = this.email
+      const password = this.password
+      if (this.register) {
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+          const errorMessage = error.message
+          this.errorMessage = errorMessage
+        }.bind(this))
+      } else {
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+          const errorMessage = error.message
+          this.errorMessage = errorMessage
+        }.bind(this))
+      }
+    },
+    logOut() {
+      firebase.auth().signOut()
     }
   }
 }
@@ -187,28 +445,6 @@ section{
 .title{
   margin-top:2rem;
 }
-// footer-------------------------------
-// .content-footer{
-//   width: 100%;
-//   margin-top:4rem;
-//   @extend %center;
-//   flex-direction: column;
-// }
-// .content-footer nav{
-//   margin-top: 2rem;
-// }
-// .footer-sepalater{
-//  width: 100%;
-//  height: 2rem;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-// }
-// .footer-sepalater .line{
-//   width:80%;
-//   height: 1px;
-//   background-color: #fff;
-// }
 .content-footer{
   width: 100vw;
   display:flex;
@@ -216,6 +452,10 @@ section{
   align-items: center;
   flex-direction: column;
   margin-bottom: -5rem;
+}
+
+.done {
+  text-decoration: line-through;
 }
 
 </style>

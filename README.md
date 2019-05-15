@@ -432,6 +432,392 @@ export const mutations = {
 }
 </script>
 ```
+#プロジェクト内のjsonファイルを直接読み込む
+1. storeディレクトリにjson.jsファイルを作り直接読み込む。
+`store/json.js`
+```
+import jsonData from '~/assets/json/appDatas.json'
+
+```
+2. storeとmutationを設定する
+`store/json.js`
+```
+import jsonData from '~/assets/json/appDatas.json'
+export const state = () => ({
+  data: jsonData
+})
+export const getters = {
+  getAll(state) {
+    return state.data
+  }
+}
+```
+3. $store.stateで表示する。
+`pages/index.vue`
+```
+<template>
+  <div class="container">
+    <section>
+        <h2>fetch メソッド</h2>
+        <h3>Stars: {{ $store.state.stars }}</h3>
+    </section>
+  </div>
+</template>
+```
+#axious fetch
+fetch メソッドは、ページがレンダリングされる前に、データをストアに入れるために使われます。 
+fetch メソッドが設定されている場合、コンポーネント（ページコンポーネントに限ります）がロードされる前に毎回呼び出されます。サーバサイドでは一度だけ呼び出され（Nuxt アプリケーションへの最初のリクエスト時）、クライアントサイドでは他のルートへ移動したときに呼び出されます。
+1. storeにstateを設定する。
+`store/index.js`
+```
+export const state = () => ({
+  starts: [],
+})
+
+export const mutations = {
+  setStars(state, payload) {
+    state.stars = payload
+  },
+}
+```
+2. axiousを　async/await を使ってstoreへデータを保存する。
+`pages/index.vue`
+```
+<template>
+  <div class="container">
+    <div class="content">
+      <section>
+        <h2>fetch メソッド</h2>
+        <h3>Stars: {{ $store.state.stars }}</h3>
+      </section>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  async fetch({ store, params }) {
+    const { data } = await axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    store.commit('setStars', data)
+  },
+}
+</script>
+```
+ 
+
+#firebase　設定
+## firestone
+参考サイト
+https://qiita.com/h-orito/items/10119bcd202b596b8b6d
+https://qiita.com/wataruoguchi/items/8fdda8e9754658be06be
+1. Firebase と VuexFire をインストールする。
+```
+$ npm install vue firebase vuexfire@next --save
+```
+2. nuxt.config.jsを設定しプラグインを使えるようにする。
+`nuxt.config`
+```
+export default {
+plugins: [
+    '~/plugins/firebase'
+  ],
+}
+```
+3. NuxtのpuluginディレクトリにFirebase.jsを作る。
+`plugins/firebase.js`
+```
+import firebase from 'firebase/app'
+import 'firebase/database'
+import 'firebase/firestore'
+import 'firebase/auth'
+
+const config = {
+  apiKey: '<key>',
+  authDomain: 'oauth3.firebaseapp.com',
+  databaseURL: 'https://oauth3.firebaseio.com',
+  projectId: 'oauth3',
+  storageBucket: 'oauth3.appspot.com'
+}
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(config)
+}
+
+export default firebase
+```
+4. store/actionType.jsに追加削除の関数を設定する。
+`store/actionTypes.js`
+```
+export const ADD_TODO = 'ADD_TODO'
+export const REMOVE_TODO = 'REMOVE_TODO'
+export const INIT_TODO = 'INIT_TODO'
+```
+
+5. store/index.jsにvuexfireを使うように編集する。
+`store/index.js`
+```
+import firebase from '@/plugins/firebase'
+import { firebaseMutations, firebaseAction } from 'vuexfire'
+import { ADD_TODO, REMOVE_TODO, INIT_TODO } from './actionTypes'
+
+const db = firebase.database()
+const itemsRef = db.ref('todos')
+console.log('db: ' + itemsRef)
+
+export const state = () => ({
+  items: [], 
+})
+
+export const mutations = {
+  ...firebaseMutations
+}
+
+export const actions = {
+  [INIT_TODO]: firebaseAction(({ bindFirebaseRef }) => {
+    bindFirebaseRef('items', itemsRef, { wait: true })
+  }),
+  [ADD_TODO]: firebaseAction((context, text) => {
+    itemsRef.push(text)
+  }),
+  [REMOVE_TODO]: firebaseAction((context, key) => {
+    itemsRef.child(key).remove()
+  })
+}
+
+export const getters = {
+  getItems: (state) => {
+    return state.items
+  }
+}
+
+```
+5. pages/indexでFirebaseからデータを表示する。
+`pagese/index.vue`
+```
+<template>
+  <div class="container">
+      <section>
+        <h2>asyncData</h2>
+        <h3><pre>App Datas: {{ jsonAll }}</pre></h3>
+      </section>
+      <section>
+        <h2>firebase</h2>
+        <h3><pre>items: {{ items }}</pre></h3>
+        <input v-model="todoText" type="text" style="color:black" @keyup.enter="addTodoFirebase">
+        <li v-for="item in items" :key="item.key">
+          {{ item.title }}
+          <button style="color: black" @click="removeTodoFirebase(item['.key'])">
+            del
+          </button>
+        </li>
+      </section>
+</template>
+
+<script>
+import { mapState, mapGetters, mapMutations } from 'vuex'
+import { ADD_TODO, REMOVE_TODO, INIT_TODO } from '~/store/actionTypes'
+import firebase from '@/plugins/firebase'
+
+export default {
+  data() {
+    return {
+      todoText: ''
+    }
+  },
+  created() {
+    this.$store.dispatch(INIT_TODO)
+  },
+  computed: {
+    ...mapState(['items'])
+  },
+  methods: {
+    addTodoFirebase() {
+      this.$store.dispatch(ADD_TODO, { title: this.todoText, done: false })
+      this.todoText = ''
+    },
+    removeTodoFirebase(key) {
+      this.$store.dispatch(REMOVE_TODO, key)
+    },
+  }
+}
+</script>
+
+```
+
+## auth
+https://qiita.com/yusuke-asaoka/items/54dd6c933bb07787cbd1
+1. google認証
+`pages/index.vue`
+```
+<template>
+  <div class="container">
+      <section>
+        <h3>Google Login</h3>
+        <div v-if="isWaiting">
+          <p>読み込み中</p>
+        </div>
+        <div v-else>
+          <div v-if="!isLogin">
+            <button style="color:black" @click="googleLogin">
+              Googleでログイン
+            </button>
+          </div>
+          <div v-else>
+            <p>{{ user.email }}でログイン中</p>
+            <button style="color:black" @click="logOut">
+              ログアウト
+            </button>
+          </div>
+        </div>
+      </section> 
+    </div>
+  </div>
+</template>
+<script>
+import firebase from '@/plugins/firebase'
+export default {
+  asyncData() {
+    return {
+      // google login
+      isWaiting: true,
+      isLogin: false,
+      user: [],
+    }
+  },
+  mounted: function () {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.isWaiting = false
+      if (user) {
+        this.isLogin = true
+        this.user = user
+        console.log('login')
+      } else {
+        this.isLogin = false
+        this.user = []
+        console.log('logout')
+      }
+    })
+  },
+  methods: {
+    google login
+    googleLogin() {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
+    },
+    logOut() {
+      firebase.auth().signOut()
+    }
+  }
+}
+</script>
+```
+2. パスワード認証
+`pages/index.vue`
+```
+<template>
+  <div class="container">
+        <section>
+          <h3>Google Auth mail</h3>
+          <div v-if="isWaiting">
+            <p>読み込み中</p>
+          </div>
+          <div v-else>
+            <div v-if="!isLogin">
+              <div>
+                <p>
+                  <input
+                    v-model="email"
+                    style="color:black"
+                    type="text"
+                    placeholder="email"
+                  >
+                </p>
+                <p>
+                  <input
+                    v-model="password"
+                    style="color:black"
+                    type="password"
+                    placeholder="password"
+                  >
+                </p>
+                <p>
+                  <input
+                    id="checkbox"
+                    v-model="register"
+                    style="color:black"
+                    type="checkbox"
+                  >
+                  <label for="checkbox">新規登録</label>
+                </p>
+                <button style="color:black" @click="passwordLogin">
+                  {{ register ? '新規登録' : 'ログイン' }}
+                </button>
+                <p>{{ errorMessage }}</p>
+              </div>
+            </div>
+            <div v-else>
+              <p>{{ user.email }}でログイン中</p>
+              <button style="color:black" @click="logOut">
+                ログアウト
+              </button>
+            </div>
+          </div>
+        </section>
+    </div>
+  </div>
+</template>
+<script>
+import firebase from '@/plugins/firebase'
+export default {
+  asyncData() {
+    return {
+      isWaiting: true,
+      isLogin: false,
+      user: [],
+      register: false,
+      email: '',
+      password: '',
+      errorMessage: ''
+    }
+  },
+  mounted: function () {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.isWaiting = false
+      if (user) {
+        this.isLogin = true
+        this.user = user
+        console.log('login')
+      } else {
+        this.isLogin = false
+        this.user = []
+        console.log('logout')
+      }
+    })
+  },
+  methods: {
+    passwordLogin() {
+      const email = this.email
+      const password = this.password
+      if (this.register) {
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+          const errorMessage = error.message
+          this.errorMessage = errorMessage
+        }.bind(this))
+      } else {
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+          const errorMessage = error.message
+          this.errorMessage = errorMessage
+        }.bind(this))
+      }
+    },
+    logOut() {
+      firebase.auth().signOut()
+    }
+  }
+}
+</script>
+```
 
 # GitHub 
 ## GitHub リポジトリの作成 
