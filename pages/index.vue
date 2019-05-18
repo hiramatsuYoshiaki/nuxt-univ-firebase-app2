@@ -36,6 +36,8 @@
           <div class="word-wrap">https://nuxt-univ-app1.netlify.com/</div>
         </a>
       </section>
+    </div>
+    <div class="content">
       <section>
         <button style="color:black" @click="increment(100)">
           <!-- counter : {{ counter }} -->
@@ -78,18 +80,21 @@
           </li>
         </ul>
       </section>
+    </div>
+    <div class="content">
       <section>
         <h2>fetch メソッド</h2>
-        <h3>Stars: {{ $store.state.stars }}</h3>
+        <!-- <h3>Stars: {{ $store.state.stars }}</h3> -->
       </section>
       <section>
         <h2>asyncData</h2>
-        <h3><pre>App Datas: {{ jsonAll }}</pre></h3>
+        <!-- <h3><pre>App Datas: {{ jsonAll }}</pre></h3> -->
       </section>
+    </div>
+    <div class="content">
       <section>
         <h2>firebase</h2>
-        <h3><pre>items: {{ items }}</pre></h3>
-        <!-- <div id="item"> -->
+        <!-- <h3><pre>items: {{ items }}</pre></h3> -->
         <input v-model="todoText" type="text" style="color:black" @keyup.enter="addTodoFirebase">
         <li v-for="item in items" :key="item.key">
           {{ item.title }}
@@ -97,8 +102,43 @@
             del
           </button>
         </li>
-        <!-- </div> -->
       </section>
+
+      <section>
+        <h2>firebase storage image</h2>
+        <!-- <h3><pre>items: {{ meetups }}</pre></h3> -->
+        <div v-for="meetup in meetups" :key="meetup.key">
+          <img :src="meetup.imageUrl" width="auto" height="50px">
+          <!-- <button style="color: black" @click="removeTodoFirebase(item['.key'])">
+            del
+          </button> -->
+          {{ meetup.title }}
+        </div>
+      </section>
+    </div>
+    <div class="content">
+      <section>
+        <h2>select image file upload</h2>
+        <form @submit.prevent="onCreateMeetup">
+          <div v-if="!image">
+            <h3>Select an image</h3>
+            <input type="file" accept="image/*" @change="onFileChange">
+          </div>
+          <div v-else>
+            <button style="color:black" @click="removeImage">
+              Remove
+            </button>
+            <!-- <img :src="image" width="auto" height="300px" style="display:block"> -->
+            <img :src="imageUrl" width="auto" height="300px" style="display:block">
+            <input v-model="createTitle" placeholder="Title" style="color:black" required>
+            <p>Title : {{ createTitle }}</p>
+            <button type="submit" style="color:black">
+              Create Meetup
+            </button>
+          </div>
+        </form>
+      </section>
+
       <!-- <section>
         <h3>Google Login</h3>
         <div v-if="isWaiting">
@@ -119,55 +159,54 @@
         </div>
       </section> -->
       <section>
-        <section>
-          <h3>Google Auth mail</h3>
-          <div v-if="isWaiting">
-            <p>読み込み中</p>
+        <h3>Google Auth mail</h3>
+        <div v-if="isWaiting">
+          <p>読み込み中</p>
+        </div>
+        <div v-else>
+          <div v-if="!isLogin">
+            <div>
+              <p>
+                <input
+                  v-model="email"
+                  style="color:black"
+                  type="text"
+                  placeholder="email"
+                >
+              </p>
+              <p>
+                <input
+                  v-model="password"
+                  style="color:black"
+                  type="password"
+                  placeholder="password"
+                >
+              </p>
+              <p>
+                <input
+                  id="checkbox"
+                  v-model="register"
+                  style="color:black"
+                  type="checkbox"
+                >
+                <label for="checkbox">新規登録</label>
+              </p>
+              <button style="color:black" @click="passwordLogin">
+                {{ register ? '新規登録' : 'ログイン' }}
+              </button>
+              <p>{{ errorMessage }}</p>
+            </div>
           </div>
           <div v-else>
-            <div v-if="!isLogin">
-              <div>
-                <p>
-                  <input
-                    v-model="email"
-                    style="color:black"
-                    type="text"
-                    placeholder="email"
-                  >
-                </p>
-                <p>
-                  <input
-                    v-model="password"
-                    style="color:black"
-                    type="password"
-                    placeholder="password"
-                  >
-                </p>
-                <p>
-                  <input
-                    id="checkbox"
-                    v-model="register"
-                    style="color:black"
-                    type="checkbox"
-                  >
-                  <label for="checkbox">新規登録</label>
-                </p>
-                <button style="color:black" @click="passwordLogin">
-                  {{ register ? '新規登録' : 'ログイン' }}
-                </button>
-                <p>{{ errorMessage }}</p>
-              </div>
-            </div>
-            <div v-else>
-              <p>{{ user.email }}でログイン中</p>
-              <button style="color:black" @click="logOut">
-                ログアウト
-              </button>
-            </div>
+            <p>{{ user.email }}でログイン中</p>
+            <button style="color:black" @click="logOut">
+              ログアウト
+            </button>
           </div>
-        </section>
+        </div>
       </section>
     </div>
+
     <transition name="mainCon" appear>
       <div class="content-footer">
         <ContentFooter />
@@ -186,7 +225,7 @@ import Logo from '~/components/Logo.vue'
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 import ContentFooter from '~/components/content/ContentFooter.vue'
 import axios from 'axios'
-import { ADD_TODO, REMOVE_TODO, INIT_TODO } from '~/store/actionTypes'
+import { ADD_TODO, REMOVE_TODO, INIT_TODO, INIT_MEETUP, CREATE_IMGDATAS } from '~/store/actionTypes'
 import firebase from '@/plugins/firebase'
 
 export default {
@@ -205,7 +244,11 @@ export default {
       pageDiscription: 'Landing',
       pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。',
       // todoText: { title: 'todo-xxx', dane: false },
-      todoText: ''
+      todoText: '',
+      image: false,
+      filename: '',
+      imageUrl: '',
+      createTitle: ''
     }
   },
   head() {
@@ -243,11 +286,11 @@ export default {
       if (user) {
         this.isLogin = true
         this.user = user
-        console.log('login')
+        // console.log('login')
       } else {
         this.isLogin = false
         this.user = []
-        console.log('logout')
+        // console.log('logout')
       }
     })
   },
@@ -257,6 +300,7 @@ export default {
   created() {
     // firebase
     this.$store.dispatch(INIT_TODO)
+    this.$store.dispatch(INIT_MEETUP)
   },
 
   computed: {
@@ -305,7 +349,9 @@ export default {
       jsonAll: 'json/getAll'
     }),
     // firebase
-    ...mapState(['items'])
+    ...mapState(['items']),
+    ...mapState(['meetups'])
+
   },
 
   methods: {
@@ -363,7 +409,67 @@ export default {
     },
     logOut() {
       firebase.auth().signOut()
+    },
+    // file upload
+    onFileChange(e) {
+      const files = e.target.files || e.dataTransfer.files
+      if (!files.length) { return }
+      this.filename = files[0].name
+      if (this.filename.lastIndexOf('.') <= 0) {
+        return alert('Please add a valid file')
+      }
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result
+        // this.image = fileReader.result
+      })
+      fileReader.readAsDataURL(files[0])
+      this.image = files[0]
+      // this.createImage(files[0])
+    },
+    // createImage(file) {
+    //   const reader = new FileReader()
+    //   const vm = this
+
+    //   reader.onload = (e) => {
+    //     vm.image = e.target.result
+    //   }
+    //   reader.readAsDataURL(file)
+    // },
+    removeImage(e) {
+      this.image = ''
+    },
+
+    onCreateMeetup() {
+      console.log('onCreateMeetup title: ' + this.createTitle)
+      console.log('onCreateMeetup title: ' + this.filename)
+      console.log(this.image)
+      const createDatas = {
+        title: this.createTitle,
+        filename: this.filename,
+        done: false,
+        image: this.image
+      }
+      console.log(createDatas)
+      this.$store.dispatch(CREATE_IMGDATAS, createDatas)
+
+      // if (text.trim()) {
+      //   this.$store.commit('inc/add', { text })
+      // }
+      // e.target.value = ''
+      // this.$store
+      //   .dispatch('uploadImage', {
+      //     name: this.filename,
+      //     file: this.image
+      //   })
+      //   .then((url) => {
+      //     // アップロード完了処理 (ローカルメンバに保存したり)
+      //     // this.fileName = fileName
+      //     // this.imageUrl = url
+      //     console.log('ok')
+      //   })
     }
+
   }
 }
 </script>
