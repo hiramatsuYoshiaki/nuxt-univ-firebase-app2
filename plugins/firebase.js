@@ -10,11 +10,11 @@ import 'firebase/storage'
 // const config = serviceAccount
 
 const config = {
-  apiKey: 'AIzaSyA6tdW1nraEFMImrgR4AaVCO6qrJqRw5kc',
-  authDomain: 'oauth3-11020.firebaseapp.com',
-  databaseURL: 'https://oauth3-11020.firebaseio.com',
-  projectId: 'oauth3-11020',
-  storageBucket: 'oauth3-11020.appspot.com'
+  apiKey: '',
+  authDomain: '',
+  databaseURL: '',
+  projectId: '',
+  storageBucket: ''
 }
 
 if (firebase.apps.length === 0) {
