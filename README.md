@@ -38,7 +38,7 @@ For detailed explanation on how things work, checkout [Nuxt.js docs](https://nux
 ***
 # nuxt.config.js setting
 > nuxt.config.jsでの導入時の設定
-# eslint
+## eslint
 フォーマットエラー対応
 ✖ 7 problems (7 errors, 0 warnings) 
   7 errors, 0 warnings potentially fixable with the `--fix` option. 
@@ -70,7 +70,7 @@ fix: true
 
 
 
-# cssプロパティ 
+## cssプロパティ 
 sass を利用したい場合は node-sass および sass-loader パッケージをインストールしてください。 
 1. install 
 ```
@@ -91,7 +91,7 @@ export default {
     </style>
 ~~~
  
-# SASS変数をvueファイルで使う 
+## SASS変数をvueファイルで使う 
 importの記述なしで使う。
 1. install 
 ```
@@ -117,7 +117,7 @@ modules: [
 }
 </style>
 ```
-# autoprefixer の設定をカスタマイズする
+## autoprefixer の設定をカスタマイズする
 Nuxt.js で CSS(Sass) をコンパイルすると、 autoprefixer がベンダープレフィクスを自動で適用してくれます。 
 1. nuxt.config setting 
 ```
@@ -143,7 +143,7 @@ https://browserl.ist/?q=%3E+1%25%2C+last+2+versions%2C+Firefox+ESR
   
 参考ページ:https://parashuto.com/rriver/tools/using-custom-data-for-autoprefixer 
 
-# Google Analytics
+## Google Analytics
 1. install 
 ```
 npm install --save @nuxtjs/google-analytics
@@ -154,7 +154,7 @@ modules: [
   ['@nuxtjs/google-analytics', { id: 'UA-xxxxx-x' }],
 ],
 ```
-# Google Serch Colsole
+## Google Serch Colsole
 1. Google Serch Colsoleからメタタグを取得
 2. nuxt.config setting
 ```
@@ -167,7 +167,7 @@ head: {
   },
 ```
 
-# Nuxt.jsで静的ファイル生成時にサイトマップも自動生成する方法
+## Nuxt.jsで静的ファイル生成時にサイトマップも自動生成する方法
 npm run generateで静的ウェブサイトを生成 
 1. install 
 ```
@@ -222,7 +222,7 @@ routes
 
 
 ***
-# markdown
+## markdown
 1. markdown-itをインストール 
 ```
 $ npm i @nuxtjs/markdownit
@@ -286,6 +286,61 @@ ex:https://techblog.scouter.co.jp/entry/2019/01/24/190000
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
     }
+```
+ 
+# dotenv を使って環境変数を設定し、Firebaseのconfigで使う。
+1. dotenvをインストール 
+```
+$ npm i @nuxtjs/dotenv
+```
+2. nuxt.config.jsを編集する 
+`nuxt.config.js`
+```
+export default {
+  modules: [
+    '@nuxtjs/dotenv'
+  ],
+  env: {
+    FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
+    FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
+    FIREBASE_DATABASEURL: process.env.FIREBASE_DATABASEURL,
+    FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
+    FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
+  },
+}
+```
+3. .envをルートディレクトリに作りキーを設定する。 
+`.env`
+```
+FIREBASE_API_KEY='<key>'
+FIREBASE_AUTH_DOMAIN='oauth3.firebaseapp.com'
+FIREBASE_DATABASEURL='https://oauth3.firebaseio.com'
+FIREBASE_PROJECTID='oauth3'
+FIREBASE_STORAGEBUCKET='oauth3.appspot.com'
+```
+4. Firebase configにprocess.envを使って設定をする。
+`plugins/firebase.js`
+```
+import firebase from 'firebase/app'
+import 'firebase/database'
+import 'firebase/firestore'
+import 'firebase/auth'
+import 'firebase/storage'
+ 
+const config = {
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASEURL,
+  projectId: process.env.FIREBASE_PROJECTID,
+  storageBucket: process.env.FIREBASE_STORAGEBUCKET
+}
+ 
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(config)
+}
+ 
+export default firebase
+
 ```
 # layouts
 > layouts ディレクトリ関連 
@@ -592,7 +647,7 @@ export const getters = {
 }
 
 ```
-5. pages/indexでFirebaseからデータを表示する。
+6. pages/indexでFirebaseからデータを表示する。
 `pagese/index.vue`
 ```
 <template>
@@ -644,6 +699,7 @@ export default {
 </script>
 
 ```
+## firebase strageを使う
 
 ## auth
 https://qiita.com/yusuke-asaoka/items/54dd6c933bb07787cbd1
