@@ -6,18 +6,39 @@
 # deploy:
 #   provider: firebase
 #   token:
+#     secure: $FIREBASE_TOKEN
 #     secure: "1/TCrGae2Ec2NFdPTLOl8p-CKmKIHUXi0Fa3Bvgg0ROA8"
 
+# language: node_js
+
+# node_js:
+#   - "10.15"
+
+# script:
+#   - echo "Deploy"
+
+# install:
+#   - npm install -g firebase-tools
+
+# after_success:
+#   - firebase deploy --token $FIREBASE_TOKEN
+
 language: node_js
-
 node_js:
-  - "10.15"
-
-script:
-  - echo "Deploy"
-
+  - 10.15
 install:
   - npm install -g firebase-tools
-
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
+  - npm i -g firebase-ci
+  - firebase-ci deploy
+branches:
+  only:
+    - master
+script:
+  - echo "Deploy"
+deploy:
+  provider: firebase
+  skip_cleanup: true
+  token:
+    secure: $FIREBASE_TOKEN
+#   project: $FIREBASE_PROJECT
