@@ -3,30 +3,30 @@
     <div class="content-header">
       <logo />
       <h1 class="title">
-        h-works
+        h-works Generate
       </h1>
       <h2 class="subtitle">
         Nuxt.js Universal SSR Firebase
       </h2>
       <h2 class="subtitle">
-        GitHub + firebase
+        GitHub + firebase + Travis CI
       </h2>
     </div>
     <div class="content">
       <section>
-        <a class="github sec-link" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1">
-          <h3>GitHub Code</h3>
-          <div class="word-wrap">hiramatsuYoshiaki/nuxt-univ-app1</div>
-          <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1</div>
+        <a class="github sec-link" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-firebase-app2">
+          <h3>GitHub </h3>
+          <div class="word-wrap">hiramatsuYoshiaki/nuxt-univ-firebase-app2</div>
+          <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-firebase-app2</div>
         </a>
-        <a class="github sec-link" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1/projects/1">
+        <!-- <a class="github sec-link" href="https://github.com/hiramatsuYoshiaki/nuxt-univ-app1/projects/1">
           <h3>GitHub Project</h3>
           <div class="word-wrap">https://github.com/hiramatsuYoshiaki/nuxt-univ-app1/projects/1</div>
         </a>
         <a class="github sec-link" href="https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/">
           <h3>GitHub Pages</h3>
           <div class="word-wrap">https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
-        </a>
+        </a> -->
       </section>
       <!-- <section>
         <a class="netlify sec-link" href="https://nuxt-univ-app1.netlify.com/">
@@ -37,11 +37,17 @@
         </a>
       </section> -->
       <section>
-        <!-- <a class="netlify sec-link" href="https://nuxt-univ-app1.netlify.com/"> -->
         <h3>Firebase</h3>
+        <a class="netlify sec-link" href="https://nuxt-app-6f771.firebaseapp.com/">
+          <div class="word-wrap">
+            Hosting https://nuxt-app-6f771.firebaseapp.com/
+          </div>
+        </a>
+        <br>
         <div class="word-wrap">
-          Nuxt App id:nuxt-app-6f771
+          Project-name:nuxt-app-6f771
         </div>
+
         <div class="word-wrap">
           Authentication google login
         </div>
@@ -51,11 +57,8 @@
         <div class="word-wrap">
           strage  gs://nuxt-app-6f771.appspot.com images
         </div>
-        <div class="word-wrap">
-          Hosting
-        </div>
+
         <!-- <div class="word-wrap">https://nuxt-univ-app1.netlify.com/</div> -->
-        <!-- </a> -->
       </section>
     </div>
     <div class="content">
