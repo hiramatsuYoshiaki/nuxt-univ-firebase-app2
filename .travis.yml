@@ -8,6 +8,6 @@ script:
  
 deploy:
   provider: firebase
-  skip_cleanup: true
   token:
     secure: "1/TCrGae2Ec2NFdPTLOl8p-CKmKIHUXi0Fa3Bvgg0ROA8"
+  project: "nuxt-app-6f771"
