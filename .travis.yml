@@ -37,7 +37,7 @@ branches:
     - master
 script:
   # - echo "Deploy"
-  - 'npm run generate'
+  - npm run generate
 deploy:
   provider: firebase
   skip_cleanup: true
