@@ -1,13 +1,13 @@
-
-
 language: node_js
+
 node_js:
   - "10.15"
+
 script:
-  - 'npm run build'
- 
-deploy:
-  provider: firebase
-  token:
-    secure: "1/TCrGae2Ec2NFdPTLOl8p-CKmKIHUXi0Fa3Bvgg0ROA8"
-  project: "nuxt-app-6f771"
+  - echo "Deploy"
+
+install:
+  - npm install -g firebase-tools
+
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN
