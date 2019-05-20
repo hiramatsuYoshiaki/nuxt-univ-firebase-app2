@@ -6,6 +6,7 @@
 # deploy:
 #   provider: firebase
 #   token:
+#     secure: $FIREBASE_TOKEN
 #     secure: "1/TCrGae2Ec2NFdPTLOl8p-CKmKIHUXi0Fa3Bvgg0ROA8"
 
 # language: node_js
@@ -40,4 +41,4 @@ deploy:
   skip_cleanup: true
   token:
     secure: $FIREBASE_TOKEN
-  project: $FIREBASE_PROJECT
+#   project: $FIREBASE_PROJECT

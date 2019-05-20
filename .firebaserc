@@ -1,6 +1,6 @@
 {
   "projects": {
     "default": "nuxt-app-6f771"
-    "staging": $FIREBASE_PROJECT
+    
   }
 }
