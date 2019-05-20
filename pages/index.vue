@@ -3,7 +3,7 @@
     <div class="content-header">
       <logo />
       <h1 class="title">
-        h-works Generate test5 deplpy--
+        h-works Generate test6 project ID
       </h1>
       <h2 class="subtitle">
         Nuxt.js Universal SSR Firebase
