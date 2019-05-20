@@ -83,7 +83,7 @@ export const actions = {
     itemsRef.child(key).remove()
   }),
   [INIT_MEETUP]: firebaseAction(({ bindFirebaseRef }) => {
-    bindFirebaseRef('items', meetupsRef, { wait: true })
+    bindFirebaseRef('meetups', meetupsRef, { wait: true })
   }),
 
   [CREATE_IMGDATAS]: (context, createDatas) => {

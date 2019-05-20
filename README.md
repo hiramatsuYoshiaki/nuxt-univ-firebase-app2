@@ -699,8 +699,8 @@ export default {
 </script>
 
 ```
+## firebase Daabaseを使う
 ## firebase strageを使う
-
 ## auth
 https://qiita.com/yusuke-asaoka/items/54dd6c933bb07787cbd1
 1. google認証
@@ -874,6 +874,96 @@ export default {
 }
 </script>
 ```
+ 
+# Firebaseで新規プロジェクトを作成しディプロイする。
+## 手動でディプロイする。
+1. Firebaseで新規プロジェクトを作成する。 
+ 
+2. Firebase CLI をインストール 
+```
+$ npm install -g firebase-tools 
+```
+ 
+3. Firebase プロジェクトにアクセスする 
+```
+$ firebase login
+```
+ 
+4. サイトを初期化する（firebasercとfirebase.jsonを作る） 
+```
+$ firebase init
+```
+ 
+  
+選択肢に答える  
+ 
+ ```
+? Are you ready to proceed?
+```
+⇒　yを押して、enterを押す 
+
+```
+ 
+? Which Firebase CLI features do you want to set up for this folder? Press Space to select features, then Enter to conf
+irm your choices. Hosting: Configure and deploy Firebase Hosting sites
+```
+ 
+下矢印キーを押してリストを選択
+⇒　hostingを選択し、スペースキーを押して、enterを押す。(ホスティングのみ選択)
+```
+? Select a default Firebase project for this directory:
+``` 
+ 
+下矢印キーを押してリストを選択（プロジェクト数が多い場合は下に隠れている）
+⇒　スペースキーを押してプロジェクトを選択して。enterを押す
+既存の場合は、`firebase use <project-name>`でプロジェクトを選択する
+``` 
+
+? What do you want to use as your public directory? 
+```
+⇒　distを入力し、enterを押す
+```
+ 
+? Configure as a single-page app (rewrite all urls to /index.html)? 
+```
+⇒　nを入力し、enterを押す。（シングルページアプリケーションの場合はy） 
+ 
+```
+? File dist/index.html already exists. Overwrite? 
+```
+⇒　ｎを入力し、enterを押す 
+ 
+5. アプリケーションのルートディレクトリにfirebasercとfirebase.jsonができていることを確認する。 
+irebase init
+6. buildもしくは、generateする 
+```
+$ npm run build もしくは、npm run generate 
+```
+ 
+7. ローカルで実行してテストしてみる 
+ 
+```
+$ firebase serve 
+```
+localhost:5000/にアクセスして確認する 　
+ 
+8. firebaseにディプロイする 
+```
+$ firebase deploy 
+```
+ 
+firebase-project-name.firebaseapp.comにアプリケーションがリリースされます。 
+9. firebaseにディプロイする 
+```
+ 
+$ firebase deploy 
+```
+https://nuxt-app-6f771.firebaseapp.com/にアクセスするか、firebaseのダッシュボードからアクセスして確認する。
+  
+## GitHubにpushしたら自動ででディプロイする。
+ 
+  
+   
 
 # GitHub 
 ## GitHub リポジトリの作成 

@@ -6,10 +6,10 @@
         h-works
       </h1>
       <h2 class="subtitle">
-        Nuxt.js Universal SSR
+        Nuxt.js Universal SSR Firebase
       </h2>
       <h2 class="subtitle">
-        GitHub + Netlify
+        GitHub + firebase
       </h2>
     </div>
     <div class="content">
@@ -28,13 +28,34 @@
           <div class="word-wrap">https://hiramatsuyoshiaki.github.io/nuxt-univ-app1/</div>
         </a>
       </section>
-      <section>
+      <!-- <section>
         <a class="netlify sec-link" href="https://nuxt-univ-app1.netlify.com/">
           <h3>Netlify</h3>
           <div class="word-wrap">Yoshiaki Hiramatsu team</div>
           <div class="word-wrap">nuxt-univ-app1</div>
           <div class="word-wrap">https://nuxt-univ-app1.netlify.com/</div>
         </a>
+      </section> -->
+      <section>
+        <!-- <a class="netlify sec-link" href="https://nuxt-univ-app1.netlify.com/"> -->
+        <h3>Firebase</h3>
+        <div class="word-wrap">
+          Nuxt App id:nuxt-app-6f771
+        </div>
+        <div class="word-wrap">
+          Authentication google login
+        </div>
+        <div class="word-wrap">
+          Database imagedatas
+        </div>
+        <div class="word-wrap">
+          strage  gs://nuxt-app-6f771.appspot.com images
+        </div>
+        <div class="word-wrap">
+          Hosting
+        </div>
+        <!-- <div class="word-wrap">https://nuxt-univ-app1.netlify.com/</div> -->
+        <!-- </a> -->
       </section>
     </div>
     <div class="content">
@@ -84,17 +105,17 @@
     <div class="content">
       <section>
         <h2>fetch メソッド</h2>
-        <!-- <h3>Stars: {{ $store.state.stars }}</h3> -->
+        <h3>Stars: {{ $store.state.stars }}</h3>
       </section>
       <section>
         <h2>asyncData</h2>
-        <!-- <h3><pre>App Datas: {{ jsonAll }}</pre></h3> -->
+        <h3><pre>App Datas: {{ jsonAll }}</pre></h3>
       </section>
     </div>
     <div class="content">
       <section>
         <h2>firebase</h2>
-        <!-- <h3><pre>items: {{ items }}</pre></h3> -->
+        <h3><pre>items: {{ items }}</pre></h3>
         <input v-model="todoText" type="text" style="color:black" @keyup.enter="addTodoFirebase">
         <li v-for="item in items" :key="item.key">
           {{ item.title }}
@@ -106,12 +127,12 @@
 
       <section>
         <h2>firebase storage image</h2>
-        <!-- <h3><pre>items: {{ meetups }}</pre></h3> -->
+        <h3><pre>items: {{ meetups }}</pre></h3>
         <div v-for="meetup in meetups" :key="meetup.key">
           <img :src="meetup.imageUrl" width="auto" height="50px">
-          <!-- <button style="color: black" @click="removeTodoFirebase(item['.key'])">
+          <button style="color: black" @click="removeTodoFirebase(item['.key'])">
             del
-          </button> -->
+          </button>
           {{ meetup.title }}
         </div>
       </section>
@@ -128,7 +149,6 @@
             <button style="color:black" @click="removeImage">
               Remove
             </button>
-            <!-- <img :src="image" width="auto" height="300px" style="display:block"> -->
             <img :src="imageUrl" width="auto" height="300px" style="display:block">
             <input v-model="createTitle" placeholder="Title" style="color:black" required>
             <p>Title : {{ createTitle }}</p>
