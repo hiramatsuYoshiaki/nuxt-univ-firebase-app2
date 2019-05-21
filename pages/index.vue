@@ -3,7 +3,7 @@
     <div class="content-header">
       <logo />
       <h1 class="title">
-        h-works Ci
+        h-works Ci test2
       </h1>
       <h2 class="subtitle">
         Nuxt.js Universal SSR Firebase

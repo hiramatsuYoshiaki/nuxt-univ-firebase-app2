@@ -22,4 +22,4 @@ workflows:
       - deploy_dev: # 上で定義したジョブを指定します
           filters:
             branches:
-              only: develop # developブランチのみを実行対象とします
+              only: dev # developブランチのみを実行対象とします
