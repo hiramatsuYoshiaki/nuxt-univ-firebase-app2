@@ -38,6 +38,9 @@
       <div >
         test27  config.yml - <pre>run: echo ${ENV} > ~/.env  </pre>
       </div>
+      <div >
+        test28  config.yml - <pre>echo "FIREBASE_API_KEY=$FIREBASE_API_KEY" > .env  </pre>
+      </div>
     </div>
     <div class="content">
       <section>
