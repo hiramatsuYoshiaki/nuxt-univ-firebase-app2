@@ -33,7 +33,7 @@
         test21  --project=$FIREBASE_PROJECT_ID
       </div>
       <div >
-        test23  config.yml - <pre>run: echo ${ENV} > ~/.env  </pre>
+        test24  config.yml - <pre>run: echo ${ENV} > ~/.env  </pre>
       </div>
     </div>
     <div class="content">
