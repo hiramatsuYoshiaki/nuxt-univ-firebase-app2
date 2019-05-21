@@ -9,11 +9,14 @@ jobs:
           name: npm install
           command: npm i
       - run:
+          name: 'Install dotenv'
+          command: npm install --save-dev @nuxtjs/dotenv
+      - run:
           name: build
           command: npm run generate
       - run:
           name: deploy to Firebase Hosting
-          command: ./node_modules/.bin/firebase deploy --project "nuxt-app-6f771" --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
+          command: ./node_modules/.bin/firebase deploy --project 'nuxt-app-6f771' --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
 
 workflows:
   version: 2

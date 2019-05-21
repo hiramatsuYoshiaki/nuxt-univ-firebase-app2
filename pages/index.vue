@@ -24,7 +24,7 @@
         test7  firebaserc default
       </div>
       <div >
-        test12  page not found error --> --project "nuxt-app-6f771"
+        test13  page not found error --> --project "nuxt-app-6f771"
       </div>
     </div>
     <div class="content">
