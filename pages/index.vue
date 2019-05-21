@@ -3,7 +3,7 @@
     <div class="content-header">
       <logo />
       <h1 class="title">
-        h-works Ci test5  generate
+        h-works Ci test6  generate  dotenv
       </h1>
       <h2 class="subtitle">
         Nuxt.js Universal SSR Firebase
