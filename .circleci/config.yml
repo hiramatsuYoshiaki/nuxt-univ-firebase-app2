@@ -10,7 +10,7 @@ jobs:
           command: npm i
       - run:
           name: build
-          command: npm run build
+          command: npm run generate
       - run:
           name: deploy to Firebase Hosting
           command: ./node_modules/.bin/firebase deploy --project nuxt-app-6f771 --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
