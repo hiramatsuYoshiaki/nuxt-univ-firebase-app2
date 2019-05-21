@@ -26,6 +26,9 @@
       <div >
         test13  page not found error --> --project "nuxt-app-6f771"
       </div>
+      <div >
+        test20  .env gitignore Exclude
+      </div>
     </div>
     <div class="content">
       <section>
