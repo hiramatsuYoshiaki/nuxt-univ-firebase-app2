@@ -11,6 +11,18 @@
       <h2 class="subtitle">
         GitHub + firebase + Circle CI
       </h2>
+      <div >
+        test4  config.yml --project nuxt-app-6f771
+      </div>
+      <div >
+        test5  config.yml build --> generate  
+      </div>
+      <div >
+        test6  pakage.json  dotenv  install --save--dev 
+      </div>
+      <div >
+        test7  firebaserc default
+      </div>
     </div>
     <div class="content">
       <section>
