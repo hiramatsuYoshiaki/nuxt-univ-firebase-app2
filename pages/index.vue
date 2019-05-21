@@ -29,6 +29,9 @@
       <div >
         test20  .env gitignore Exclude
       </div>
+      <div >
+        test21  --project=$FIREBASE_PROJECT_ID
+      </div>
     </div>
     <div class="content">
       <section>
