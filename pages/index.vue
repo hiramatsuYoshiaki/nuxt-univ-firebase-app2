@@ -3,13 +3,13 @@
     <div class="content-header">
       <logo />
       <h1 class="title">
-        h-works Generate test12
+        h-works Ci
       </h1>
       <h2 class="subtitle">
         Nuxt.js Universal SSR Firebase
       </h2>
       <h2 class="subtitle">
-        GitHub + firebase + Travis CI
+        GitHub + firebase + Circle CI
       </h2>
     </div>
     <div class="content">
