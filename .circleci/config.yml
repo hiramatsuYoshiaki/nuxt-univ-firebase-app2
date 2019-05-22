@@ -6,14 +6,14 @@ jobs:
     steps:
       - checkout # ソースコードのチェックアウト
       - run:
-          name: Add env
+          name: Add env # .envを作成　セキュリティのためGitHubにはアップしないため
           command: |
             echo "FIREBASE_API_KEY=$FIREBASE_API_KEY" > .env
             echo "FIREBASE_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN" >> .env
             echo "FIREBASE_DATABASE_URL=$FIREBASE_DATABASE_URL" >> .env
             echo "FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID" >> .env
             echo "FIREBASE_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET" >> .env
-      #       echo "FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID" >> .env
+          # echo "FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID" >> .env
       - run: # 順に実行したいコマンドとコマンドに名前をつけます
           name: npm install
           command: npm i
@@ -31,4 +31,4 @@ workflows:
       - deploy_dev: # 上で定義したジョブを指定します
           filters:
             branches:
-              only: dev # developブランチのみを実行対象とします
+              only: dev # developブランチのみを実行対象とします。今回はdevブランチ
