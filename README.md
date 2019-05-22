@@ -1004,7 +1004,7 @@ name:  FIREBASE_STORAGEBUCKET
 value: nuxt-app-xxxx.appspot.com
 ```　
  
-7. ircleCIではnpm -gでのコマンド実行が出来ないため、グローバルインストールのみの場合は、pakage.jsonに追加するために、プロジェクトにインストールする。 　
+7. CircleCIではnpm -gでのコマンド実行が出来ないため、グローバルインストールのみの場合は、pakage.jsonに追加するために、プロジェクトにインストールする。 　
  　
 ```
 $ npm install --save-dev firebase-tools
@@ -1139,6 +1139,7 @@ workflows:
   git pull origin master  
 ```
 ## Githubへのpushでusername/passwordの入力対応（https）
+#usernameの入力省略
 1. リモートリポジトリの接続を確認する
 ```
 $ git remote -v
@@ -1155,6 +1156,20 @@ $ git remote rm
 ```
 $ git remote add origin https://hiramatsuYoshiaki@github.com/hiramatsuYoshiaki/nuxt-univ-firebase-app2.git
 ```
+push時にユザー名は聞かれない。 
+ 
+#usernameの入力省略
+1. パスワードを一定時間保持して、入力を省略する。
+```
+$git config --global credential.helper cache
+```
+15分パスワードを保持
+```
+$git config --global credential.helper cache 'cache --timeout=3600'
+```
+60分パスワードを保持
+ 
+
 
 
 

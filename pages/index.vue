@@ -42,7 +42,10 @@
         test28  config.yml - <pre>echo "FIREBASE_API_KEY=$FIREBASE_API_KEY" > .env  </pre>
       </div>
       <div >
-        test29  git push no username test
+        test29  git push no username ENTER TEST　
+      </div>
+      <div >
+        test30  <pre>$ git config --global credential.helper cache</pre>　 NO PASS ENTER 
       </div>
     </div>
     <div class="content">
