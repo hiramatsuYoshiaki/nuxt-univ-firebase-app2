@@ -519,7 +519,7 @@ export const getters = {
   </div>
 </template>
 ```
-#axious fetch
+# axious fetch
 fetch メソッドは、ページがレンダリングされる前に、データをストアに入れるために使われます。 
 fetch メソッドが設定されている場合、コンポーネント（ページコンポーネントに限ります）がロードされる前に毎回呼び出されます。サーバサイドでは一度だけ呼び出され（Nuxt アプリケーションへの最初のリクエスト時）、クライアントサイドでは他のルートへ移動したときに呼び出されます。
 1. storeにstateを設定する。
@@ -875,7 +875,7 @@ export default {
 </script>
 ```
  
-# Firebaseで新規プロジェクトを作成しディプロイする。
+# Firebaseで新規プロジェクトを作成しディプロイする。 
 ## 手動でディプロイする。
 1. Firebaseで新規プロジェクトを作成する。 
  
@@ -893,7 +893,6 @@ $ firebase login
 ```
 $ firebase init
 ```
- 
   
 選択肢に答える  
  
@@ -908,20 +907,19 @@ $ firebase init
 irm your choices. Hosting: Configure and deploy Firebase Hosting sites
 ```
  
-下矢印キーを押してリストを選択
-⇒　hostingを選択し、スペースキーを押して、enterを押す。(ホスティングのみ選択)
+下矢印キーを押してリストを選択 
+⇒　hostingを選択し、スペースキーを押して、enterを押す。(ホスティングのみ選択) 
 ```
 ? Select a default Firebase project for this directory:
 ``` 
  
-下矢印キーを押してリストを選択（プロジェクト数が多い場合は下に隠れている）
-⇒　スペースキーを押してプロジェクトを選択して。enterを押す
-既存の場合は、`firebase use <project-name>`でプロジェクトを選択する
+下矢印キーを押してリストを選択（プロジェクト数が多い場合は下に隠れている） 
+⇒　スペースキーを押してプロジェクトを選択して。enterを押す 
 ``` 
 
 ? What do you want to use as your public directory? 
 ```
-⇒　distを入力し、enterを押す
+⇒　distを入力し、enterを押す 
 ```
  
 ? Configure as a single-page app (rewrite all urls to /index.html)? 
@@ -952,19 +950,113 @@ localhost:5000/にアクセスして確認する 　
 $ firebase deploy 
 ```
  
-firebase-project-name.firebaseapp.comにアプリケーションがリリースされます。 
-9. firebaseにディプロイする 
+9. firebaseにホスティングされていることを確認する。 
+https://nuxt-app-xxxx.firebaseapp.com/にアクセスするか、firebaseのダッシュボードからアクセスして確認する。 
+  
+ 
+## Circle CI でGitHubにpushしたら自動でディプロイする。 
+https://qiita.com/nakata_kazuhiro/items/53c7f06900ae3156e07b 
+https://note.mu/yoneapp/n/n7037373c0b76
+  
+1. CircleCIへGitHubでloginする。 
+```
+$ firebase login:ci
 ```
  
-$ firebase deploy 
-```
-https://nuxt-app-6f771.firebaseapp.com/にアクセスするか、firebaseのダッシュボードからアクセスして確認する。
-  
-## GitHubにpushしたら自動ででディプロイする。
+2. CircleCIにログイン後、画面のサイドバーから「JOBS」を選択し該当リポジトリの歯車アイコンをクリックして画面遷移 
  
-  
-   
 
+3. BUILD SETTINGSの「Environment Variables」へ遷移し環境変数を登録する。 
+  
+4. デプロイ用のFirebaseトークンを取得し設定する 
+```
+ 
+$ firebase login:ci
+```
+表示されたデプロイ用のFirebaseトークンをコピーする。
+Circle CIのEnvironment Variables画面の「Add Variable」ボタンを押しポップアップ画面に入力する。
+```
+nema:  FIREBASE_API_KEY 
+value: xxxaoxnMhPCgF8SoK2ND6HDdh4G0-bKm-xxxxxxxxxxxx
+```
+ 
+5. firebaseプロジェクトIDを設定する
+```
+name:  FIREBASE_PROJECT_ID
+value: nuxt-app-xxxxxxxx
+```
+ 
+6. firebaseConfigを設定する　
+```
+name:  FIREBASE_API_KEY
+value: xxxxxxxxx_zE8_oNkN43OS-xhlIIAQv2uOjLTLI 
+ 
+name:  FIREBASE_AUTH_DOMAIN
+value: nuxt-app-xxxx.firebaseapp.com
+ 
+name:  FIREBASE_DATABASEURL
+value: https://nuxt-app-xxxx.firebaseio.com
+ 
+name:  FIREBASE_PROJECTID
+value: nuxt-app-xxxx
+ 
+name:  FIREBASE_STORAGEBUCKET
+value: nuxt-app-xxxx.appspot.com
+```
+
+7. CircleCIではnpm -gでのコマンド実行が出来ないため、グローバルインストールのみの場合は、pakage.jsonに追加するために、プロジェクトにインストールする。 　
+ 　
+```
+$ npm install --save-dev firebase-tools
+$ npm install --save-dev @nuxtjs/dotenv
+```
+ 
+
+8. CircleCIの設定ファイルを作成
+プロジェクト直下に`.circleci/config.yml`ファイルを作成します。 　
+ 　
+9. .circleci/config.ymlを編集する 
+```
+version: 2
+jobs:
+  deploy_dev: # ジョブ名
+    docker:
+      - image: circleci/node:10.15.3 # ジョブ実行環境のDockerイメージを記述
+    steps:
+      - checkout # ソースコードのチェックアウト
+      - run:
+          name: Add env # .envを作成　セキュリティのためGitHubにはアップしないため
+          command: |
+            echo "FIREBASE_API_KEY=$FIREBASE_API_KEY" > .env
+            echo "FIREBASE_AUTH_DOMAIN=$FIREBASE_AUTH_DOMAIN" >> .env
+            echo "FIREBASE_DATABASE_URL=$FIREBASE_DATABASE_URL" >> .env
+            echo "FIREBASE_PROJECT_ID=$FIREBASE_PROJECT_ID" >> .env
+            echo "FIREBASE_STORAGE_BUCKET=$FIREBASE_STORAGE_BUCKET" >> .env
+          # echo "FIREBASE_MESSAGING_SENDER_ID=$FIREBASE_MESSAGING_SENDER_ID" >> .env
+      - run: # 順に実行したいコマンドとコマンドに名前をつけます
+          name: npm install
+          command: npm i
+      - run:
+          name: build
+          command: npm run generate
+      - run:
+          name: deploy to Firebase Hosting
+          command: ./node_modules/.bin/firebase deploy --project=$FIREBASE_PROJECT_ID --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
+
+workflows:
+  version: 2
+  deploy_dev: # ワークフローの名前
+    jobs:
+      - deploy_dev: # 上で定義したジョブを指定します
+          filters:
+            branches:
+              only: dev # developブランチのみを実行対象とします。今回はdevブランチ
+```
+ 
+10. developブランチをビルド可能な状態でpushするとジョブが実行されます。
+11. Circle CIのjobs画面で確認できます。 
+12. https://nuxt-app-xxxx.firebaseapp.com/にアクセスしホスティングされていることを確認します。
+ 
 # GitHub 
 ## GitHub リポジトリの作成 
 1. GitHub ログイン後のトップページから、Repositories の New ボタンをクリックします。 
@@ -1036,7 +1128,9 @@ https://nuxt-app-6f771.firebaseapp.com/にアクセスするか、firebaseのダ
 ```  
 
 ## localでいままで作業していたbranchを削除する 
-  1.これで削除できます。これはしなくてもいいですが、開発が進んでいくとbranchが増えてbranch一覧がごちゃごちゃしてくるのでやったほうがいいです。  
+  1.これで削除できます。これはしなくてもいいですが、
+   開発が進んでいくとbranchが増えてbranch一覧がごちゃごちゃしてくるので 
+   やったほうがいいです。  
   ```
   git branch -d new-branch  
   ```
@@ -1046,6 +1140,42 @@ https://nuxt-app-6f771.firebaseapp.com/にアクセスするか、firebaseのダ
 ```
   git pull origin master  
 ```
+## Githubへのpushでusername/passwordの入力対応（https）
+#usernameの入力省略
+1. リモートリポジトリの接続を確認する
+```
+$ git remote -v
+origin  https://github.com/hiramatsuYoshiaki/nuxt-univ-firebase-app2.git (fetch)
+origin  https://github.com/hiramatsuYoshiaki/nuxt-univ-firebase-app2.git (push)
+```
+clone時にhttpsのurlでcloneしたのでhttps通信方法になっている。 
+ 
+2. リモートリポジトリを削除する。
+```
+$ git remote rm
+```
+3. リモートリポジトリのurlにユザー名入れて追加する。
+```
+$ git remote add origin https://hiramatsuYoshiaki@github.com/hiramatsuYoshiaki/nuxt-univ-firebase-app2.git
+```
+push時にユザー名は聞かれない。 
+ 
+#usernameの入力省略
+1. パスワードを一定時間保持して、入力を省略する。
+Windows を使っているなら、wincred という補助ツールがあります。 
+Windows Credential Store）で、重要な情報を管理します。 
+```
+$ git config --global credential.helper wincred
+```
+15分パスワードを保持
+```
+$ git config --global credential.helper wincred cache 'cache --timeout=3600'
+```
+60分パスワードを保持
+ 
+
+
+
 
 # netlify 
 1. netlifyログインする。 

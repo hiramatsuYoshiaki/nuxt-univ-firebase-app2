@@ -3,7 +3,7 @@
     <div class="content-header">
       <logo />
       <h1 class="title">
-        h-works Ci
+        h-works Ci test6  generate  dotenv
       </h1>
       <h2 class="subtitle">
         Nuxt.js Universal SSR Firebase
@@ -11,6 +11,42 @@
       <h2 class="subtitle">
         GitHub + firebase + Circle CI
       </h2>
+      <div >
+        test4  config.yml --project nuxt-app-6f771
+      </div>
+      <div >
+        test5  config.yml build --> generate  
+      </div>
+      <div >
+        test6  pakage.json  dotenv  install --save--dev 
+      </div>
+      <div >
+        test7  firebaserc default
+      </div>
+      <div >
+        test13  page not found error --> --project "nuxt-app-6f771"
+      </div>
+      <div >
+        test20  .env gitignore Exclude
+      </div>
+      <div >
+        test21  --project=$FIREBASE_PROJECT_ID
+      </div>
+      <div >
+        test25  .env gitignore Include generate error
+      </div>
+      <div >
+        test27  config.yml - <pre>run: echo ${ENV} > ~/.env  </pre>
+      </div>
+      <div >
+        test28  config.yml - <pre>echo "FIREBASE_API_KEY=$FIREBASE_API_KEY" > .env  </pre>
+      </div>
+      <div >
+        test29  git push no username ENTER TEST　
+      </div>
+      <div >
+        test32  <pre>git config --global credential.helper wincred</pre>　 NO PASS ENTER 
+      </div>
     </div>
     <div class="content">
       <section>
