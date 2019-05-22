@@ -519,7 +519,7 @@ export const getters = {
   </div>
 </template>
 ```
-#axious fetch
+# axious fetch
 fetch メソッドは、ページがレンダリングされる前に、データをストアに入れるために使われます。 
 fetch メソッドが設定されている場合、コンポーネント（ページコンポーネントに限ります）がロードされる前に毎回呼び出されます。サーバサイドでは一度だけ呼び出され（Nuxt アプリケーションへの最初のリクエスト時）、クライアントサイドでは他のルートへ移動したときに呼び出されます。
 1. storeにstateを設定する。
@@ -953,9 +953,9 @@ $ firebase deploy
 9. firebaseにホスティングされていることを確認する。 
 https://nuxt-app-xxxx.firebaseapp.com/にアクセスするか、firebaseのダッシュボードからアクセスして確認する。 
   
-
+ 
 ## Circle CI でGitHubにpushしたら自動でディプロイする。 
-https://qiita.com/nakata_kazuhiro/items/53c7f06900ae3156e07b
+https://qiita.com/nakata_kazuhiro/items/53c7f06900ae3156e07b 
 https://note.mu/yoneapp/n/n7037373c0b76
   
 1. CircleCIへGitHubでloginする。 
@@ -1002,8 +1002,8 @@ value: nuxt-app-xxxx
  
 name:  FIREBASE_STORAGEBUCKET
 value: nuxt-app-xxxx.appspot.com
-```　
- 
+```
+
 7. CircleCIではnpm -gでのコマンド実行が出来ないため、グローバルインストールのみの場合は、pakage.jsonに追加するために、プロジェクトにインストールする。 　
  　
 ```
@@ -1128,7 +1128,9 @@ workflows:
 ```  
 
 ## localでいままで作業していたbranchを削除する 
-  1.これで削除できます。これはしなくてもいいですが、開発が進んでいくとbranchが増えてbranch一覧がごちゃごちゃしてくるのでやったほうがいいです。  
+  1.これで削除できます。これはしなくてもいいですが、
+   開発が進んでいくとbranchが増えてbranch一覧がごちゃごちゃしてくるので 
+   やったほうがいいです。  
   ```
   git branch -d new-branch  
   ```
@@ -1160,10 +1162,16 @@ push時にユザー名は聞かれない。
  
 #usernameの入力省略
 1. パスワードを一定時間保持して、入力を省略する。
+Windows を使っているなら、wincred という補助ツールがあります。 
+Windows Credential Store）で、重要な情報を管理します。 
 ```
 $ git config --global credential.helper wincred
 ```
-
+15分パスワードを保持
+```
+$ git config --global credential.helper wincred cache 'cache --timeout=3600'
+```
+60分パスワードを保持
  
 
 
