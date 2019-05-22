@@ -47,6 +47,9 @@
       <div >
         test32  <pre>git config --global credential.helper wincred</pre>　 NO PASS ENTER 
       </div>
+      <div >
+        test34  firebase config FIREBASE_MESSAGING_SENDER_ID set
+      </div>
     </div>
     <div class="content">
       <section>
