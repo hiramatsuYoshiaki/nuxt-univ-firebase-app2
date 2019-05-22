@@ -45,7 +45,7 @@
         test29  git push no username ENTER TEST　
       </div>
       <div >
-        test30  <pre>$ git config --global credential.helper cache</pre>　 NO PASS ENTER 
+        test30-2  <pre>$ git config --global credential.helper cache</pre>　 NO PASS ENTER 
       </div>
     </div>
     <div class="content">
