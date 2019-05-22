@@ -1161,13 +1161,9 @@ push時にユザー名は聞かれない。
 #usernameの入力省略
 1. パスワードを一定時間保持して、入力を省略する。
 ```
-$git config --global credential.helper cache
+$ git config --global credential.helper wincred
 ```
-15分パスワードを保持
-```
-$git config --global credential.helper cache 'cache --timeout=3600'
-```
-60分パスワードを保持
+
  
 
 
