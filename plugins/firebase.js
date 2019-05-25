@@ -6,8 +6,7 @@ import 'firebase/auth'
 import 'firebase/storage'
 // import 'firebase/messaging'
 // import 'firebase/functions'
-// const serviceAccount = require('../serviceAccountKey.json')
-// const config = serviceAccount
+
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
