@@ -11,30 +11,30 @@
       </transition>
     </div>
     <transition name="mainCon" appear>
-      <ConContact />
+      <ConLogin />
     </transition>
     <transition appear name="transitionScreen">
-      <TransitionScreen v-if="page === '/contact'" />
+      <TransitionScreen v-if="page === '/login'" />
     </transition>
   </div>
 </template>
 
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
-import ConContact from '~/components/content/contact/ConContact.vue'
+import ConLogin from '~/components/content/login/ConLogin.vue'
 export default {
   layout: 'topPage',
   //   transition: 'content-slide',
   components: {
     TransitionScreen,
-    ConContact
+    ConLogin
   },
   data() {
     return {
-      img: require('~/assets/img/img3668.jpg'),
-      pageTitle: 'Works Content',
+      img: require('~/assets/img/img2731.jpg'),
+      pageTitle: 'Login Content',
       pageSubTitle: 'Nuxt.js Demo Site',
-      pageDiscription: 'Overview',
+      pageDiscription: 'Login',
       pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。'
 
     }
@@ -45,8 +45,8 @@ export default {
       meta: [
         // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
         { hid: 'description',
-          name: 'contact by Nuxt.js',
-          content: 'このページは、h-worksの紹介と連絡先です。' }
+          name: 'login by Nuxt.js',
+          content: 'このページは、h-worksのログインページです' }
       ]
     }
   },
@@ -55,14 +55,14 @@ export default {
       return this.$store.state.page
     }
   }
-  // methods: {
-  //   link_commit(linkPath) {
-  //     this.$store.commit('pagePathSet', linkPath)
-  //     setTimeout(() => {
-  //       this.$router.push({ path: link_path })
-  //     }, 500)
-  //   }
-  // }
+//   methods: {
+//     link_commit(linkPath) {
+//       this.$store.commit('pagePathSet', linkPath)
+//       setTimeout(() => {
+//         this.$router.push({ path: link_path })
+//       }, 500)
+//     }
+//   }
 }
 </script>
 <style scoped lang="scss">

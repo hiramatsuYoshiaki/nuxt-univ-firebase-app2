@@ -287,7 +287,8 @@ ex:https://techblog.scouter.co.jp/entry/2019/01/24/190000
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
     }
 ```
- 
+
+## 
 # dotenv を使って環境変数を設定し、Firebaseのconfigで使う。
 1. dotenvをインストール 
 ```
@@ -342,6 +343,12 @@ if (firebase.apps.length === 0) {
 export default firebase
 
 ```
+
+
+# middleware 
+> middleware ディレクトリ関連
+## 
+
 # layouts
 > layouts ディレクトリ関連 
 ## カスタムレイアウト

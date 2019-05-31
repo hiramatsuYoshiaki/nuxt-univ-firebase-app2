@@ -16,8 +16,26 @@
             <div class="menu_underline" />
           </div>
           <div class="menu-item-box">
+            <div class="menu_link" :class="{ menu_item_visible: page === '/plan' }" @click="link_commit('/plan')">
+              PLAN
+            </div>
+            <div class="menu_underline" />
+          </div>
+          <div class="menu-item-box">
             <div class="menu_link" :class="{ menu_item_visible: page === '/contact' }" @click="link_commit('/contact')">
               CONTACT
+            </div>
+            <div class="menu_underline" />
+          </div>
+
+          <div class="menu-item-box">
+            <div class="menu_link" :class="{ menu_item_visible: page === '/login' }" @click="link_commit('/login')">
+              <div v-if="isUser">
+                logoff
+              </div>
+              <div v-else>
+                Login
+              </div>
             </div>
             <div class="menu_underline" />
           </div>
@@ -49,8 +67,26 @@
               <div class="menu_underline" />
             </div>
             <div class="menu-item-box">
+              <a class="menu_link" :class="{ menu_item_visible: page === '/plan' }" @click="link_commit('/plan')">
+                PLAN
+              </a>
+              <div class="menu_underline" />
+            </div>
+            <div class="menu-item-box">
               <a class="menu_link" :class="{ menu_item_visible: page === '/contact' }" @click="link_commit('/contact')">
                 CONTACT
+              </a>
+              <div class="menu_underline" />
+            </div>
+
+            <div class="menu-item-box">
+              <a class="menu_link" :class="{ menu_item_visible: page === '/login' }" @click="link_commit('/login')">
+                <div v-if="isUser">
+                  logoff
+                </div>
+                <div v-else>
+                  Login
+                </div>
               </a>
               <div class="menu_underline" />
             </div>
@@ -83,6 +119,9 @@ export default {
   computed: {
     page() {
       return this.$store.state.page
+    },
+    isUser() {
+      return this.$store.state.isLogin
     }
   },
   methods: {
@@ -119,10 +158,10 @@ export default {
     width:100vw;
     z-index: 1000;
     border-bottom:1px solid rgba(250,250,250,.1);
-    background-color: #212121;
+    // background-color: $footer-color-color;
+    background-color: red;
     margin:0;
     padding:0;
-
 }
 //nav-menu---------------------------------------
 .nav-menu{
@@ -134,18 +173,18 @@ export default {
     display: flex;
     flex-direction: row;
 }
-.nav-menu .block{
-    width: 33.333%;
-    height:100%;
-}
+
 .nav-menu .left-block{
    @extend %left;
+   width: 25%;
 }
 .nav-menu .center-block{
    @extend %center;
+   width: 25%;
 }
 .nav-menu .right-block{
    @extend %right;
+   width: 50%;
 }
 //logo bar----------------------------------------
 .logo-wrap{
@@ -207,10 +246,10 @@ export default {
 }
 .menu_link{
     display: inline-block;
-    opacity: .5;
+    opacity: .75;
     text-transform: uppercase;
     &:hover{
-      opacity: .75;
+      opacity: 1;
     }
 }
 .menu_item_visible{
@@ -224,7 +263,7 @@ export default {
     left:0;
     width:100vw;
     height: calc(100vh + #{ $header-height });
-    background-color:rgba(0,0,0,1);
+    background-color: $footer-color-color;
     @extend %center;
 }
 .v_open_menu{

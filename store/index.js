@@ -17,18 +17,41 @@ const imgdatasRef = db.ref('imgdatas')
 
 export const state = () => ({
   page: 'home',
+
   starts: [],
   counter: 0,
   items: [],
   meetups: [],
-  isLogin: false
+
+  isLogin: false,
+  user: [],
+  userEmail: '',
+  userName: '',
+  PhotoUrl: '',
+  isWaiting: false
 })
 
 export const mutations = {
   setLogin(state, payload) {
     state.isLogin = payload
-    console.log('isUser' + payload)
   },
+  setUser(state, payload) {
+    state.user = payload
+  },
+  setUserEmail(state, payload) {
+    state.userEmail = payload
+  },
+  setUserName(state, payload) {
+    state.userName = payload
+  },
+  setUserPhotoUrl(state, payload) {
+    state.PhotoUrl = payload
+  },
+
+  setWaiting(state, payload) {
+    state.Waiting = payload
+  },
+
   setStars(state, payload) {
     state.stars = payload
   },

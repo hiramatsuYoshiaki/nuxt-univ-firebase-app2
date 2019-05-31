@@ -13,9 +13,65 @@
           <h2 class="subtitle">
             Nuxt.js Universal SSR
           </h2>
+
           <h2 class="subtitle">
             GitHub + CircleCI + Firebase
           </h2>
+          <!-- <buttn class="btn-sign-in">
+            Sing in Google Account
+          </buttn> -->
+          <!-- <div class="btn-sign-in">
+            <nuxt-link to="/login" class="sign-in-text">
+              Sign in Google Account
+            </nuxt-link>
+          </div> -->
+          <br>
+          <p>Firebase Demo</p>
+          <div class="btn-box">
+            <a @click="link_commit('/login')">
+              Googleログイン
+            </a>
+          </div>
+          <div class="btn-box">
+            <a @click="link_commit('/todo')">
+              Project ToDos
+            </a>
+          </div>
+          <div class="btn-box">
+            <a @click="link_commit('/photo')">
+              Project Update
+            </a>
+          </div>
+          <!-- <div class="btn-sign-in">
+            <a @click="link_commit('/login')">
+              Sing in for h-Works
+            </a>
+            <div class="menu_underline" />
+          </div> -->
+          <!-- <section>
+            <div v-if="isWaiting">
+              <p>読み込み中</p>
+            </div>
+            <div v-else>
+              <div v-if="!isLogin">
+                <h3>Google Login </h3>
+                <button style="color:black" @click="googleLogin">
+                  Googleでログイン
+                </button>
+              </div>
+              <div v-else>
+                <h3>Google Login</h3>
+                <div>{{ userName }}</div>
+                <div>{{ userEmail }}</div>
+                <div>{{ userPhotoUrl }}</div>
+                <img :src="userPhotoUrl" alt="user image" class="image-mask">
+                <p>{{ userName }}でログイン中</p>
+                <button style="color:black" @click="logOut">
+                  ログアウト
+                </button>
+              </div>
+            </div>
+          </section> -->
         </div>
       </div>
     </div>
@@ -163,17 +219,6 @@
         </div>
       </div>
     </transition>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
     <!-- <div class="content-header">
       <logo />
@@ -386,27 +431,34 @@
         </form>
       </section>
 
-      <!-- <section>
-        <h3>Google Login</h3>
+      <section>
+        <!-- <div>{{ uid }}</div> -->
+
         <div v-if="isWaiting">
           <p>読み込み中</p>
         </div>
         <div v-else>
           <div v-if="!isLogin">
+            <h3>Google Login </h3>
             <button style="color:black" @click="googleLogin">
               Googleでログイン
             </button>
           </div>
           <div v-else>
-            <p>{{ user.email }}でログイン中</p>
+            <!-- <p>{{ user.email }}でログイン中</p> -->
+            <h3>Google Login</h3>
+            <div>{{ userName }}</div>
+            <div>{{ userEmail }}</div>
+            <div>{{ userPhotoUrl }}</div>
+            <p>{{ user.Name }}でログイン中</p>
             <button style="color:black" @click="logOut">
               ログアウト
             </button>
           </div>
         </div>
-      </section> -->
+      </section>
 
-      <section>
+      <!-- <section>
         <h3>8.Google Auth mail asyncData</h3>
         <div v-if="isWaiting">
           <p>読み込み中</p>
@@ -452,7 +504,7 @@
             </button>
           </div>
         </div>
-      </section>
+      </section> -->
     </div>
 
     <transition name="mainCon" appear>
@@ -479,6 +531,7 @@ import firebase from '@/plugins/firebase'
 export default {
   layout: 'topPage',
   // transition: 'content-slide',
+  // middleware: 'auth',
   components: {
     Logo,
     ContentFooter,
@@ -502,16 +555,6 @@ export default {
       createTitle: ''
     }
   },
-  head() {
-    return {
-      title: this.pageTitle,
-      meta: [
-        { hid: 'description',
-          name: 'landing by Nuxt.js',
-          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したデモサイトです。' }
-      ]
-    }
-  },
   asyncData() {
     return {
       // google login
@@ -525,40 +568,64 @@ export default {
       errorMessage: ''
     }
   },
+  head() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        { hid: 'description',
+          name: 'landing by Nuxt.js',
+          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したデモサイトです。' }
+      ]
+    }
+  },
+
   async fetch({ store, params }) {
     // const { data } = await axios.get('~/static/json/posy.json')
     const { data } = await axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
     store.commit('setStars', data)
   },
-  mounted: function () {
-    // goolge login, mail login
-    firebase.auth().onAuthStateChanged((user) => {
-      this.isWaiting = false
-      if (user) {
-        this.isLogin = true
-        this.user = user
-        console.log('login')
-        this.$store.commit('setLogin', true)
-      } else {
-        this.isLogin = false
-        this.user = []
-        console.log('logout')
-        this.$store.commit('setLogin', false)
-      }
-    })
-  },
-  // created() {
-  // this.$store.dispatch('setItemsRef', { ref: db.ref('meetups') })
-  // },
   created() {
     // firebase
     this.$store.dispatch(INIT_TODO)
     this.$store.dispatch(INIT_MEETUP)
   },
+  mounted: function () {
+    // goolge login, mail login
+    this.isWaiting = true
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.isLogin = true
+        this.user = user
+        console.log('login')
+        this.$store.commit('setLogin', true)
+        this.$store.commit('setUserEmail', this.user.email)
+        this.$store.commit('setUserName', this.user.displayName)
+        this.$store.commit('setUserPhotoUrl', this.user.photoURL)
+      } else {
+        this.isLogin = false
+        this.user = []
+        console.log('logout')
+        this.$store.commit('setLogin', false)
+        this.$store.commit('setUserEmail', '')
+        this.$store.commit('setUserName', '')
+        this.$store.commit('setUserPhotoUrl', '')
+      }
+      this.isWaiting = false
+    })
+  },
 
   computed: {
     isUser() {
       return this.$store.state.isLogin
+    },
+    userEmail() {
+      return this.$store.state.userEmail
+    },
+    userName() {
+      return this.$store.state.userName
+    },
+    userPhotoUrl() {
+      return this.$store.state.PhotoUrl
     },
     // page() {
     //   return this.$store.state.page
@@ -642,36 +709,36 @@ export default {
       this.$store.dispatch(REMOVE_TODO, key)
     },
     // google login
-    // googleLogin() {
-    //   const provider = new firebase.auth.GoogleAuthProvider()
-    //   firebase.auth().signInWithRedirect(provider)
-    // },
-    // logOut() {
-    //   firebase.auth().signOut()
-    // }
-    // mail login password
-    passwordLogin() {
-      const email = this.email
-      const password = this.password
-      if (this.register) {
-        this.$store.commit('setLogin', true)
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-          const errorMessage = error.message
-          this.errorMessage = errorMessage
-          this.$store.commit('setLogin', false)
-        }.bind(this))
-      } else {
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-          const errorMessage = error.message
-          this.errorMessage = errorMessage
-          this.$store.commit('setLogin', false)
-        }.bind(this))
-      }
+    googleLogin() {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithRedirect(provider)
     },
     logOut() {
       firebase.auth().signOut()
-      this.$store.commit('setLogin', false)
     },
+    // mail login password
+    // passwordLogin() {
+    //   const email = this.email
+    //   const password = this.password
+    //   if (this.register) {
+    //     this.$store.commit('setLogin', true)
+    //     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+    //       const errorMessage = error.message
+    //       this.errorMessage = errorMessage
+    //       this.$store.commit('setLogin', false)
+    //     }.bind(this))
+    //   } else {
+    //     firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+    //       const errorMessage = error.message
+    //       this.errorMessage = errorMessage
+    //       this.$store.commit('setLogin', false)
+    //     }.bind(this))
+    //   }
+    // },
+    // logOut() {
+    //   firebase.auth().signOut()
+    //   this.$store.commit('setLogin', false)
+    // },
     // file upload
     onFileChange(e) {
       const files = e.target.files || e.dataTransfer.files
@@ -730,6 +797,13 @@ export default {
       //     // this.imageUrl = url
       //     console.log('ok')
       //   })
+    },
+    link_commit(linkPath) {
+      this.active = true
+      this.$store.commit('pagePathSet', linkPath)
+      setTimeout(() => {
+        this.$router.push({ path: linkPath })
+      }, 500)
     }
 
   }
@@ -758,6 +832,8 @@ export default {
   width: 100vw;
   @extend %center;
   flex-direction: column;
+  margin:0;
+  padding: 0;
 }
 .content{
   width: 100%;
@@ -811,6 +887,11 @@ export default {
     font-weight: 500;
     line-height: 2.5rem;
   }
+  .sign-in-text{
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2.1rem;
+  }
   @media(min-width: 992px){
     width:70%;
     h1{
@@ -823,8 +904,34 @@ export default {
       font-weight: 400;
       line-height: 4.5rem;
     }
+    .sign-in-text{
+    font-size: 2.0rem;
+      font-weight: 500;
+      line-height: 2.5rem;
+  }
+  }
+  .btn-box{
+    width: 30rem;
+    margin-top: 2rem;
+    padding:1rem 3rem;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    @media(min-width: 992px){
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+  }
+  .image-mask{
+    border-radius: 50%;
+    width:5rem;
+    height:5rem;
   }
 }
+
 // content-header-second-------------------------
 .content-header-second{
   @extend %center;
@@ -834,7 +941,10 @@ export default {
 // content-main-title----------------------------
 .content-main-tec{
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  @media(min-width: 992px){
+    height: 100vh;
+  }
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -855,6 +965,41 @@ export default {
   color: #212121;
   border: 2px solid rgba(0,0,0,.3);
   border-radius: 5px;
+
+}
+.con-main-sec{
+  h1{
+    font-size: 3.0rem;
+    font-weight: 700;
+    line-height: 3.5rem;
+  }
+  h2{
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.5rem;
+  }
+  p{
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.4rem;
+  }
+  @media(min-width: 992px){
+    h1{
+      font-size: 6.0rem;
+      font-weight: 700;
+      line-height: 6.5rem;
+    }
+    h2{
+      font-size: 4.0rem;
+      font-weight: 400;
+      line-height: 4.5rem;
+    }
+    p{
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 2.5rem;
+    }
+  }
 }
 .con-main-line{
   width: 100%;
@@ -874,7 +1019,7 @@ export default {
   display:block;
   margin: 2rem;
 }
-// main------------------------------
+// main inpliment------------------------------
 .content-main-implement{
   width: 100vw;
   background-color: rgb(230,230,230);
