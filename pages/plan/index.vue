@@ -20,7 +20,7 @@
     </div>
     <transition name="mainCon" appear>
       <div class="content-main">
-        <WorksIntro />
+        <conPlan />
       </div>
     </transition>
     <transition name="mainCon" appear>
@@ -29,7 +29,7 @@
       </div>
     </transition>
     <transition appear name="transitionScreen">
-      <TransitionScreen v-if="page === '/works'" />
+      <TransitionScreen v-if="page === '/plan'" />
     </transition>
   </div>
 </template>
@@ -37,7 +37,7 @@
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
 
-import WorksIntro from '~/components/content/works/WorksIntro.vue'
+import ConPlan from '~/components/content/plan/ConPlan.vue'
 // import One from '~/components/content/One.vue'
 // import Two from '~/components/content/Two.vue'
 // import ContentMain from '~/components/content/ContentMain.vue'
@@ -46,23 +46,18 @@ import ConHeader from '~/components/content/ConHeader.vue'
 import ContentFooter from '~/components/content/ContentFooter.vue'
 export default {
   layout: 'topPage',
-  //   transition: 'content-slide'
   components: {
     TransitionScreen,
     ConHeader,
-    WorksIntro,
-    // One,
-    // Two,
-    // HistoryLayout,
-    // ContentMain,
+    ConPlan,
     ContentFooter
   },
   data() {
     return {
-      img: require('~/assets/img/fuji1.jpg'),
-      pageTitle: 'Works Content',
+      img: require('~/assets/img/img3482.jpg'),
+      pageTitle: 'Plan Content',
       pageSubTitle: 'Nuxt.js Demo Site',
-      pageDiscription: 'Firebase Demo',
+      pageDiscription: 'Ploject To Do',
       pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。'
     }
   },
@@ -72,8 +67,8 @@ export default {
       meta: [
         // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
         { hid: 'description',
-          name: 'Works by Nuxt.js',
-          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したWebサイトの概略を紹介しています。' }
+          name: 'Plan by Nuxt.js',
+          content: 'このページは、Vue.jsフレームワークのNuxt.jsを使って作成したWebサイトのTodoリストの修正ができます。' }
       ]
     }
   },
@@ -115,8 +110,6 @@ export default {
   margin-top: $header-height;
   @extend %center;
   flex-direction: column;
-  margin:0;
-  padding: 0;
 }
 .content-header{
     width:100vw;

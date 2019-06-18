@@ -57,7 +57,6 @@
       </div>
     </div>
   </div>
-  </div>
 </template>
 <script>
 // import readMe from '~/assets/readMe/readMe.md'

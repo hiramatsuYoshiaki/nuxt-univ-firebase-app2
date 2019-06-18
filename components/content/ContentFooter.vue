@@ -36,6 +36,16 @@
         <div class="menu-item-box">
           <a
             class="menu_link"
+            :class="{ menu_item_visible: page === '/plan' }"
+            @click="link_commit('/plan')"
+          >
+            PLAN
+          </a>
+          <div class="menu_underline" />
+        </div>
+        <div class="menu-item-box">
+          <a
+            class="menu_link"
             :class="{ menu_item_visible: page === '/contact' }"
             @click="link_commit('/contact')"
           >

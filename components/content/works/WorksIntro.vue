@@ -1,12 +1,41 @@
 <template>
   <div class="worksIntro">
+    <h1>Firebase Demo</h1>
+    <p>Nuxt.jsフレームワークをベースとしたアプリケーションへの、Firebase機能の実装テストです。</p>
+    <div class="flex-container select-mode">
+      <div class="two-col">
+        <section>
+          <div class="mode-text">
+            Authentication
+          </div>
+          <h5>Googleログイン</h5>
+        </section>
+      </div>
+      <div class="two-col">
+        <section>
+          <div class="mode-text">
+            Realtime Database
+          </div>
+          <h5>Project Todo</h5>
+        </section>
+        <section>
+          <div class="mode-text">
+            Cloud Storage
+          </div>
+          <h5>My Photos</h5>
+        </section>
+      </div>
+    </div>
+
     <h1>Overview</h1>
     <p>
       Vue.jsのフレームワークNuxt.jsを使った
       サーバーサイドレンダリングのデモサイトです。
-      このウェブアプリケーションは、GithubとNetlifyに連携しています。
+      このウェブアプリケーションは、
+      GitHubとCircleCIとFirebaseが連携しています。
       Githubのブランチにマージすると、
-      Netlifyは自動的に生成しホスティングされます。
+      CircleCIはFirebase Hostingに自動的ディプロイを行い、
+      アプリケーションを公開します。
     </p>
 
     <div class="flex-container select-mode">
@@ -46,7 +75,7 @@
       <div class="two-col">
         <section>
           <div class="mode-text">
-            GitHub + netlify
+            GitHub + Circle CI + Firebase
           </div>
           <h5>バージョン管理と自動ディプロイ</h5>
         </section>
@@ -60,7 +89,11 @@
         </section>
         <section>
           <h3>自動ディプロイ</h3>
-          <p>Netlifyは新しいコミットを検出し、あなたのサイトを自動的に再構築し、そして結果を即時のグローバルアップデートとしてデプロイします。</p>
+          <p>Circle CIは新しいコミットを検出し、あなたのサイトを自動的に再構築し、そして結果を即時のグローバルアップデートとしてデプロイします。</p>
+        </section>
+        <section>
+          <h3>Firebase</h3>
+          <p>Firebaseは、ホスティング、認証、データベース、ストレージなどの包括的な開発プラットフォームを提供してくれます。</p>
         </section>
       </div>
     </div>

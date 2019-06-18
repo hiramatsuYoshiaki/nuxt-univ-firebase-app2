@@ -11,30 +11,30 @@
       </transition>
     </div>
     <transition name="mainCon" appear>
-      <ConContact />
+      <ConPhoto />
     </transition>
     <transition appear name="transitionScreen">
-      <TransitionScreen v-if="page === '/contact'" />
+      <TransitionScreen v-if="page === '/photo'" />
     </transition>
   </div>
 </template>
 
 <script>
 import TransitionScreen from '~/components/transition/TransitionScreen.vue'
-import ConContact from '~/components/content/contact/ConContact.vue'
+import ConPhoto from '~/components/content/photo/ConPhoto.vue'
 export default {
   layout: 'topPage',
   //   transition: 'content-slide',
   components: {
     TransitionScreen,
-    ConContact
+    ConPhoto
   },
   data() {
     return {
-      img: require('~/assets/img/img3668.jpg'),
-      pageTitle: 'Works Content',
+      img: require('~/assets/img/img3698z.jpg'),
+      pageTitle: 'photo Content',
       pageSubTitle: 'Nuxt.js Demo Site',
-      pageDiscription: 'Overview',
+      pageDiscription: 'photo List',
       pageDiscriptionDetail: 'Vue.jsのフレームワークNuxt.jsを使ったデモサイトです。'
 
     }
@@ -45,8 +45,8 @@ export default {
       meta: [
         // `hid` は一意の識別子として使用されます。 `vmid` は動作しないので使わないでください。
         { hid: 'description',
-          name: 'contact by Nuxt.js',
-          content: 'このページは、h-worksの紹介と連絡先です。' }
+          name: 'photo by Nuxt.js',
+          content: 'このページは、h-worksのfirebase strageを使ったphoto listを作るページです' }
       ]
     }
   },
@@ -55,14 +55,14 @@ export default {
       return this.$store.state.page
     }
   }
-  // methods: {
-  //   link_commit(linkPath) {
-  //     this.$store.commit('pagePathSet', linkPath)
-  //     setTimeout(() => {
-  //       this.$router.push({ path: link_path })
-  //     }, 500)
-  //   }
-  // }
+//   methods: {
+//     link_commit(linkPath) {
+//       this.$store.commit('pagePathSet', linkPath)
+//       setTimeout(() => {
+//         this.$router.push({ path: link_path })
+//       }, 500)
+//     }
+//   }
 }
 </script>
 <style scoped lang="scss">
@@ -83,14 +83,15 @@ export default {
 }
 .container{
   width: 100vw;
-  height: calc(100vh - #{ $header-height } );
+  min-height: calc(100vh - #{ $header-height } );
   margin-top: $header-height;
   padding: 0 2rem;
-  @media (min-width: 992px){
-    padding: 0 5rem;
-  }
-  @extend %center;
+  // @media (min-width: 992px){
+  //   padding: 0 5rem;
+  // }
+  @extend %left;
   flex-direction: column;
+   border: 2px solid white;
 }
 
 </style>

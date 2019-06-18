@@ -17,7 +17,10 @@ export default {
     ],
     link: [
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      { rel: 'icon', type: 'image/x-icon', href: '/h-logo-white.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/h-logo-white.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
+     
     ]
   },
 
@@ -42,6 +45,11 @@ export default {
     // { src: '~/assets/sass/main.scss', lang: 'scss' },
     // { src: '~/assets/sass/stylus.scss', lang: 'scss' },
   ],
+  styleResources: {
+    sass: [
+      '~/assets/sass/variable.scss',
+    ],
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -61,18 +69,15 @@ export default {
     '@nuxtjs/dotenv'
   ],
   env: {
-    FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
-    FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
-    FIREBASE_DATABASEURL: process.env.FIREBASE_DATABASEURL,
-    FIREBASE_PROJECTID: process.env.FIREBASE_PROJECTID,
-    FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
-    // FIREBASE_MESSAGINGSENDERID: process.env.FIREBASE_MESSAGINGSENDERID
+    FIREBASE_API_KEY:process.env.FIREBASE_API_KEY,
+    FIREBASE_AUTH_DOMAIN:process.env.FIREBASE_AUTH_DOMAIN,
+    FIREBASE_DATABASEURL:process.env.FIREBASE_DATABASEURL,
+    FIREBASE_PROJECTID:process.env.FIREBASE_PROJECTID,
+    FIREBASE_STORAGEBUCKET:process.env.FIREBASE_STORAGEBUCKET,
+    FIREBASE_MESSAGINGSENDERID:process.env.FIREBASE_MESSAGINGSENDERID
+    
   },
-  styleResources: {
-    sass: [
-      '~/assets/sass/variable.scss',
-    ],
-  },
+  
   sitemap: {
     // path: '/sitemap.xml',//Default: sitemap.xml
     hostname: 'https://romantic-kare-6d357c.netlify.com/',
@@ -111,7 +116,13 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-
+  /*
+  ** middleware
+  */ 
+  //すべての画面遷移時にミドルウェアが実行されるようになる。
+  // router: {
+  //   middleware: ['auth']
+  // },
   /*
   ** Build configuration
   */

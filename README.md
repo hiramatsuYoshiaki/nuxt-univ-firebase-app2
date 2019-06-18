@@ -287,7 +287,8 @@ ex:https://techblog.scouter.co.jp/entry/2019/01/24/190000
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
     }
 ```
- 
+
+## 
 # dotenv を使って環境変数を設定し、Firebaseのconfigで使う。
 1. dotenvをインストール 
 ```
@@ -342,6 +343,12 @@ if (firebase.apps.length === 0) {
 export default firebase
 
 ```
+
+
+# middleware 
+> middleware ディレクトリ関連
+## 
+
 # layouts
 > layouts ディレクトリ関連 
 ## カスタムレイアウト
@@ -562,7 +569,7 @@ export default {
  
 
 #firebase　設定
-## firestone
+## firebase VuexFire
 参考サイト
 https://qiita.com/h-orito/items/10119bcd202b596b8b6d
 https://qiita.com/wataruoguchi/items/8fdda8e9754658be06be
@@ -700,7 +707,71 @@ export default {
 
 ```
 ## firebase Daabaseを使う
+`store/index.js`
+```
+import firebase from '@/plugins/firebase'
+import { firebaseMutations, firebaseAction } from 'vuexfire'
+import { ADD_TODO, REMOVE_TODO, INIT_TODO, } from './actionTypes'
+const db = firebase.database()
+const itemsRef = db.ref('imgdatas')
+
+export const state = () => ({
+  items: [],
+})
+export const mutations = {
+  ...firebaseMutations
+}
+export const actions = {
+  [INIT_TODO]: firebaseAction(({ bindFirebaseRef }) => {
+    bindFirebaseRef('items', itemsRef, { wait: true })
+  }),
+  [ADD_TODO]: firebaseAction((context, text) => {
+    itemsRef.push(text)
+  }),
+  [REMOVE_TODO]: firebaseAction((context, key) => {
+    itemsRef.child(key).remove()
+  }),
+}
+```
 ## firebase strageを使う
+`store/index.js`
+```
+import firebase from '@/plugins/firebase'
+import { firebaseMutations, firebaseAction } from 'vuexfire'
+import { CREATE_IMGDATAS } from './actionTypes'
+const db = firebase.database()
+const imgdatasRef = db.ref('imgdatas')
+export const state = () => ({
+  items: [],
+})
+export const mutations = {
+  ...firebaseMutations
+}
+export const actions = {
+  [CREATE_IMGDATAS]: (context, createDatas) => {
+    const imgDatas = {
+      title: createDatas.title,
+      filename: createDatas.filename,
+      done: createDatas.done,
+      imageUrl: ''
+    }
+    const filename = createDatas.filename
+    firebase.storage().ref('images/' + filename).put(createDatas.image)
+      .then((fileData) => {
+        return firebase.storage().ref('images/' + filename).getDownloadURL()
+      }).then((url) => {
+        console.log('url:' + url)
+        imgDatas.imageUrl = url
+        return imgdatasRef.push(imgDatas)
+      })
+      .catch((err) => {
+        console.log('firebase error code: ' + err)
+      })
+  }
+}
+```
+
+
 ## auth
 https://qiita.com/yusuke-asaoka/items/54dd6c933bb07787cbd1
 1. google認証
@@ -1141,6 +1212,8 @@ workflows:
   git pull origin master  
 ```
 ## Githubへのpushでusername/passwordの入力対応（https）
+https://did2memo.net/2015/07/26/github-remember-username-https/
+https://garicchi.com/?p=19323
 #usernameの入力省略
 1. リモートリポジトリの接続を確認する
 ```
@@ -1161,11 +1234,12 @@ $ git remote add origin https://hiramatsuYoshiaki@github.com/hiramatsuYoshiaki/n
 push時にユザー名は聞かれない。 
  
 #usernameの入力省略
+https://help.github.com/en/articles/caching-your-github-password-in-git
 1. パスワードを一定時間保持して、入力を省略する。
 Windows を使っているなら、wincred という補助ツールがあります。 
 Windows Credential Store）で、重要な情報を管理します。 
 ```
-$ git config --global credential.helper wincred
+$ git config --global credential.helper wincred 
 ```
 15分パスワードを保持
 ```
