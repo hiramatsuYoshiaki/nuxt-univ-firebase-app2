@@ -1,7 +1,7 @@
 <template>
   <div class="conContent">
     <div class="flex-container">
-      <div class="two-col">
+      <div class="one-col">
         <div class="col-block left-block">
           <div class="section-block left-section">
             <div class="contact-title">
@@ -13,18 +13,31 @@
                   <div class="userWrap">
                     <img :src="userPhotoUrl" alt="user image" class="image-mask">
                     <h1>ようこそ、{{ userName }} さん</h1>
+                    <div class="btn-box" @click="logOut">
+                      Logout
+                    </div>
+                    <div class="btn-box" @click="link_commit('/')">
+                      close
+                    </div>
                   </div>
                 </div>
                 <div v-else>
                   <h1>Google アカウントで</h1>
                   <h1>ログインしてください。</h1>
+                  <div class="btn-box" @click="googleLogin">
+                    Login
+                  </div>
+                  <div class="btn-box" @click="link_commit('/')">
+                    close
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="two-col">
+
+      <!-- <div class="one-col">
         <div class="col-block right-block">
           <div class="section-block left-section">
             <div v-if="isUser">
@@ -39,7 +52,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -80,12 +93,14 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.commit('setLogin', true)
+        this.$store.commit('setUid', user.uid)
         this.$store.commit('setUserEmail', user.email)
         this.$store.commit('setUserName', user.displayName)
         this.$store.commit('setUserPhotoUrl', user.photoURL)
         this.isWaiting = false
       } else {
         this.$store.commit('setLogin', false)
+        this.$store.commit('setUid', '')
         this.$store.commit('setUserEmail', '')
         this.$store.commit('setUserName', '')
         this.$store.commit('setUserPhotoUrl', '')
@@ -94,6 +109,13 @@ export default {
     })
   },
   methods: {
+    // routing transition
+    link_commit(linkPath) {
+      this.$store.commit('pagePathSet', linkPath)
+      setTimeout(() => {
+        this.$router.push({ path: linkPath })
+      }, 500)
+    },
     googleLogin() {
       const provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithRedirect(provider).then(function (result) {
@@ -128,14 +150,6 @@ export default {
           console.log('google login error: ' + error)
         })
     }
-  },
-  // routing transition
-  link_commit(linkPath) {
-    this.active = true
-    this.$store.commit('pagePathSet', linkPath)
-    setTimeout(() => {
-      this.$router.push({ path: linkPath })
-    }, 500)
   }
 
 }

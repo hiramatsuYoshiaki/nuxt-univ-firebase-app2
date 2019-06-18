@@ -14,7 +14,7 @@
 //   console.log('サンプルミドルウェア', route.path)
 // }
 export default function ({ route, store, redirect }) {
-  console.log('サンプルミドルウェア', route.path)
+  // console.log('サンプルミドルウェア', route.path)
   const linkPath = '/login'
   if (!store.state.isLogin) {
     store.commit('pagePathSet', linkPath)

@@ -33,6 +33,11 @@
             </a>
           </div>
           <div class="btn-box">
+            <a @click="link_commit('/todolist')">
+              Todo List
+            </a>
+          </div>
+          <!-- <div class="btn-box">
             <a @click="link_commit('/todo')">
               Project ToDos
             </a>
@@ -41,7 +46,7 @@
             <a @click="link_commit('/photo')">
               Project Update
             </a>
-          </div>
+          </div> -->
           <!-- <div class="btn-sign-in">
             <a @click="link_commit('/login')">
               Sing in for h-Works
