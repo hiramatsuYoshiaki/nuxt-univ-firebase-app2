@@ -19,7 +19,7 @@
     "@nuxtjs/sitemap": "^1.0.0",
     "cross-env": "^5.2.0",
     "firebase": "^6.0.2",
-    "nuxt": "^2.6.3",
+    "nuxt": "^2.15.8",
     "vue": "^2.6.10",
     "vuexfire": "^2.3.1"
   },
